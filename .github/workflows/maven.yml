@@ -60,6 +60,6 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Make sure to add this secret
       with:
         args: >
-          -Dsonar.projectKey=abdel505_collection_2
+          -Dsonar.projectKey=abdel505_collection-2
           -Dsonar.organization=abdel505
           -Dsonar.host.url=https://sonarcloud.io    
