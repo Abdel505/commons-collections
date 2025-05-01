@@ -51,7 +51,7 @@ jobs:
         java-version: ${{ matrix.java }}
 
     - name: Build with Maven
-      run: mvn -X --errors --show-version --batch-mode --no-transfer-progress clean install
+      run: mvn --errors --show-version --batch-mode --no-transfer-progress clean install
       
 
     # SonarCloud Analysis
@@ -63,4 +63,6 @@ jobs:
         args: >
           -Dsonar.projectKey=abdel505_collection-2
           -Dsonar.organization=abdel505
-          -Dsonar.host.url=https://sonarcloud.io    
+          -Dsonar.host.url=https://sonarcloud.io
+          -Dsonar.java.binaries=target/classes
+          -X
