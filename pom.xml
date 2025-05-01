@@ -227,6 +227,7 @@
           </archive>
         </configuration>
       </plugin>
+
       <plugin>
         <!-- NOTE: javadoc config must also be set under <reporting> -->
         <groupId>org.apache.maven.plugins</groupId>
@@ -250,6 +251,11 @@
           </dependency>
         </dependencies>
       </plugin>
+    	<plugin>
+	    <groupId>org.sonarsource.scanner.maven</groupId>
+	    <artifactId>sonar-maven-plugin</artifactId>
+	    <version>3.9.1.2184</version>
+	</plugin>
     </plugins>
   </build>
   <reporting>
