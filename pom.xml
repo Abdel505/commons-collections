@@ -216,6 +216,8 @@
             <exclude>.asf.yaml</exclude>
             <exclude>site-content/**/*</exclude>
             <exclude>src/test/resources/org/apache/commons/collections4/data/test/*</exclude>
+            <exclude>target/rat.txt</exclude>		  
+            <exclude>**/target/**</exclude>           
           </excludes>
         </configuration>
       </plugin>
