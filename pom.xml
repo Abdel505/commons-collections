@@ -217,7 +217,10 @@
             <exclude>site-content/**/*</exclude>
             <exclude>src/test/resources/org/apache/commons/collections4/data/test/*</exclude>
             <exclude>target/rat.txt</exclude>		  
-            <exclude>**/target/**</exclude>           
+            <exclude>**/target/**</exclude> 
+            <exclude>**/*.iml</exclude>
+            <exclude>**/.idea/**</exclude>
+            <exclude>**/*.log</exclude>			  
           </excludes>
         </configuration>
       </plugin>
@@ -347,6 +350,9 @@
             <exclude>src/test/resources/org/apache/commons/collections4/data/test/*</exclude>
             <exclude>target/rat.txt</exclude>		  
             <exclude>**/target/**</exclude> 
+            <exclude>**/*.iml</exclude>
+            <exclude>**/.idea/**</exclude>
+            <exclude>**/*.log</exclude>		  
           </excludes>
         </configuration>
       </plugin>
