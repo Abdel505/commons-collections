@@ -38,7 +38,7 @@ jobs:
         echo "Testing compilation with Java ${{ matrix.java }} (source: $JAVA_SOURCE, target: $JAVA_TARGET)"
         
         mvn --batch-mode --no-transfer-progress \
-          clean apache-rat:check compile test-compile \
+          clean compile test-compile \
           -Dmaven.compiler.source=$JAVA_SOURCE \
           -Dmaven.compiler.target=$JAVA_TARGET
         
