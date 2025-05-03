@@ -215,12 +215,7 @@
           <excludes>
             <exclude>.asf.yaml</exclude>
             <exclude>site-content/**/*</exclude>
-            <exclude>src/test/resources/org/apache/commons/collections4/data/test/*</exclude>
-            <exclude>target/rat.txt</exclude>		  
-            <exclude>**/target/**</exclude> 
-            <exclude>**/*.iml</exclude>
-            <exclude>**/.idea/**</exclude>
-            <exclude>**/*.log</exclude>			  
+            <exclude>src/test/resources/org/apache/commons/collections4/data/test/*</exclude>		  
           </excludes>
         </configuration>
       </plugin>
@@ -347,12 +342,7 @@
           <excludes>
             <exclude>.asf.yaml</exclude>
             <exclude>site-content/**/*</exclude>
-            <exclude>src/test/resources/org/apache/commons/collections4/data/test/*</exclude>
-            <exclude>target/rat.txt</exclude>		  
-            <exclude>**/target/**</exclude> 
-            <exclude>**/*.iml</exclude>
-            <exclude>**/.idea/**</exclude>
-            <exclude>**/*.log</exclude>		  
+            <exclude>src/test/resources/org/apache/commons/collections4/data/test/*</exclude>	  
           </excludes>
         </configuration>
       </plugin>
