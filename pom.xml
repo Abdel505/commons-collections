@@ -343,6 +343,8 @@
             <exclude>.asf.yaml</exclude>
             <exclude>site-content/**/*</exclude>
             <exclude>src/test/resources/org/apache/commons/collections4/data/test/*</exclude>
+            <exclude>/home/runner/work/commons-collections/commons-collections/target/rat.txt</exclude>		  
+		  
           </excludes>
         </configuration>
       </plugin>
