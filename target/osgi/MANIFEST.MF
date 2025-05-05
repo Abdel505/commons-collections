@@ -1,0 +1,58 @@
+Manifest-Version: 1.0
+Build-Jdk-Spec: 21
+Bundle-Description: The Apache Commons Collections package contains type
+ s that extend and augment the Java Collections Framework.
+Bundle-DocURL: https://commons.apache.org/proper/commons-collections/
+Bundle-License: https://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-ManifestVersion: 2
+Bundle-Name: Apache Commons Collections
+Bundle-SymbolicName: org.apache.commons.commons-collections4
+Bundle-Vendor: The Apache Software Foundation
+Bundle-Version: 4.5.1.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin 6.0.0
+Export-Package: org.apache.commons.collections4;version="4.5.1.SNAPSHOT"
+ ;uses:="org.apache.commons.collections4.iterators,org.apache.commons.co
+ llections4.map,org.w3c.dom",org.apache.commons.collections4.bag;version
+ ="4.5.1.SNAPSHOT";uses:="org.apache.commons.collections4,org.apache.com
+ mons.collections4.collection",org.apache.commons.collections4.bidimap;v
+ ersion="4.5.1.SNAPSHOT";uses:="org.apache.commons.collections4,org.apac
+ he.commons.collections4.collection,org.apache.commons.collections4.iter
+ ators,org.apache.commons.collections4.keyvalue,org.apache.commons.colle
+ ctions4.map",org.apache.commons.collections4.bloomfilter;version="4.5.1
+ .SNAPSHOT",org.apache.commons.collections4.collection;version="4.5.1.SN
+ APSHOT";uses:="org.apache.commons.collections4",org.apache.commons.coll
+ ections4.comparators;version="4.5.1.SNAPSHOT";uses:="org.apache.commons
+ .collections4",org.apache.commons.collections4.functors;version="4.5.1.
+ SNAPSHOT";uses:="org.apache.commons.collections4",org.apache.commons.co
+ llections4.iterators;version="4.5.1.SNAPSHOT";uses:="org.apache.commons
+ .collections4,org.w3c.dom",org.apache.commons.collections4.keyvalue;ver
+ sion="4.5.1.SNAPSHOT";uses:="org.apache.commons.collections4",org.apach
+ e.commons.collections4.list;version="4.5.1.SNAPSHOT";uses:="org.apache.
+ commons.collections4,org.apache.commons.collections4.collection,org.apa
+ che.commons.collections4.iterators",org.apache.commons.collections4.map
+ ;version="4.5.1.SNAPSHOT";uses:="org.apache.commons.collections4,org.ap
+ ache.commons.collections4.keyvalue,org.apache.commons.collections4.set"
+ ,org.apache.commons.collections4.multimap;version="4.5.1.SNAPSHOT";uses
+ :="org.apache.commons.collections4",org.apache.commons.collections4.mul
+ tiset;version="4.5.1.SNAPSHOT";uses:="org.apache.commons.collections4,o
+ rg.apache.commons.collections4.collection,org.apache.commons.collection
+ s4.iterators",org.apache.commons.collections4.properties;version="4.5.1
+ .SNAPSHOT",org.apache.commons.collections4.queue;version="4.5.1.SNAPSHO
+ T";uses:="org.apache.commons.collections4,org.apache.commons.collection
+ s4.collection",org.apache.commons.collections4.sequence;version="4.5.1.
+ SNAPSHOT";uses:="org.apache.commons.collections4",org.apache.commons.co
+ llections4.set;version="4.5.1.SNAPSHOT";uses:="org.apache.commons.colle
+ ctions4,org.apache.commons.collections4.collection",org.apache.commons.
+ collections4.splitmap;version="4.5.1.SNAPSHOT";uses:="org.apache.common
+ s.collections4",org.apache.commons.collections4.trie;version="4.5.1.SNA
+ PSHOT";uses:="org.apache.commons.collections4",org.apache.commons.colle
+ ctions4.trie.analyzer;version="4.5.1.SNAPSHOT";uses:="org.apache.common
+ s.collections4.trie"
+Import-Package: java.io,java.lang,java.lang.invoke,java.lang.ref,java.la
+ ng.reflect,java.net,java.nio.file,java.text,java.util,java.util.concurr
+ ent,java.util.concurrent.atomic,java.util.concurrent.locks,java.util.fu
+ nction,java.util.stream,org.w3c.dom
+Include-Resource: META-INF/LICENSE.txt=LICENSE.txt,META-INF/NOTICE.txt=N
+ OTICE.txt
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Tool: Bnd-7.1.0.202411251545
