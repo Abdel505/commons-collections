@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: org.apache.commons.collections4.map.SingletonMapTest
+-------------------------------------------------------------------------------
+Tests run: 67, Failures: 0, Errors: 0, Skipped: 3, Time elapsed: 0.041 s -- in org.apache.commons.collections4.map.SingletonMapTest

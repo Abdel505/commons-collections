@@ -1,0 +1,1845 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>AbstractMultiSetDecorator.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/*</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Licensed to the Apache Software Foundation (ASF) under one or more</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * contributor license agreements.  See the NOTICE file distributed with</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * this work for additional information regarding copyright ownership.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * The ASF licenses this file to You under the Apache License, Version 2.0</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * (the &#34;License&#34;); you may not use this file except in compliance with</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * the License.  You may obtain a copy of the License at</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *      http://www.apache.org/licenses/LICENSE-2.0</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Unless required by applicable law or agreed to in writing, software</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_12'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * distributed under the License is distributed on an &#34;AS IS&#34; BASIS,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_14'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * See the License for the specific language governing permissions and</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_15'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * limitations under the License.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_16'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_17'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package org.apache.commons.collections4.multiset;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_18'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_19'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.Set;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_20'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_21'/>
+21
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_21'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.apache.commons.collections4.MultiSet;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_22'/>
+22
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_22'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.apache.commons.collections4.collection.AbstractCollectionDecorator;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_23'/>
+23
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_23'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_24'/>
+24
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_24'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_25'/>
+25
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_25'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Decorates another {@code MultiSet} to provide additional behavior.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_26'/>
+26
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_26'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * &#60;p&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_27'/>
+27
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_27'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Methods are forwarded directly to the decorated multiset.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_28'/>
+28
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_28'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * &#60;/p&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_29'/>
+29
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_29'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_30'/>
+30
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_30'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * @param &#60;E&#62; the type held in the multiset</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_31'/>
+31
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_31'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * @since 4.1</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_32'/>
+32
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_32'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_33'/>
+33
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_33'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>public abstract class AbstractMultiSetDecorator&#60;E&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_34'/>
+34
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_34'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        extends AbstractCollectionDecorator&#60;E&#62; implements MultiSet&#60;E&#62; {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_35'/>
+35
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_35'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_36'/>
+36
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_36'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /** Serialization version */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_37'/>
+37
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_37'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private static final long serialVersionUID = 20150610L;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_38'/>
+38
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_38'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_39'/>
+39
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_39'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_40'/>
+40
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_40'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Constructor only used in deserialization, do not use otherwise.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_41'/>
+41
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_41'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_42'/>
+42
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_42'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>    protected AbstractMultiSetDecorator() {</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_43'/>
+43
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_43'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_44'/>
+44
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_44'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_45'/>
+45
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_45'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_46'/>
+46
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_46'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Constructor that wraps (not copies).</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_47'/>
+47
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_47'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_48'/>
+48
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_48'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param multiset  the multiset to decorate, must not be null</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_49'/>
+49
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_49'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @throws NullPointerException if multiset is null</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_50'/>
+50
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_50'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_51'/>
+51
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_51'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    protected AbstractMultiSetDecorator(final MultiSet&#60;E&#62; multiset) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_52'/>
+52
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_52'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        super(multiset);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_53'/>
+53
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_53'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_54'/>
+54
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_54'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_55'/>
+55
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_55'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_56'/>
+56
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_56'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public int add(final E object, final int count) {</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_57'/>
+57
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_57'>4</a>
+<span>
+
+1. add : removed call to org/apache/commons/collections4/MultiSet::add &rarr; NO_COVERAGE<br/>
+
+2. add : replaced call to org/apache/commons/collections4/MultiSet::add with argument &rarr; NO_COVERAGE<br/>
+
+3. add : replaced int return with 0 for org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::add &rarr; NO_COVERAGE<br/>
+
+4. add : removed call to org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::decorated &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        return decorated().add(object, count);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_58'/>
+58
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_58'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_59'/>
+59
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_59'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_60'/>
+60
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_60'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_61'/>
+61
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_61'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Gets the multiset being decorated.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_62'/>
+62
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_62'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_63'/>
+63
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_63'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @return the decorated multiset</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_64'/>
+64
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_64'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_65'/>
+65
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_65'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_66'/>
+66
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_66'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    protected MultiSet&#60;E&#62; decorated() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_67'/>
+67
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_67'>2</a>
+<span>
+
+1. decorated : replaced return value with null for org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::decorated &rarr; KILLED<br/>
+
+2. decorated : removed call to org/apache/commons/collections4/collection/AbstractCollectionDecorator::decorated &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return (MultiSet&#60;E&#62;) super.decorated();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_68'/>
+68
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_68'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_69'/>
+69
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_69'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_70'/>
+70
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_70'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_71'/>
+71
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_71'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public Set&#60;Entry&#60;E&#62;&#62; entrySet() {</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_72'/>
+72
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_72'>3</a>
+<span>
+
+1. entrySet : removed call to org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::decorated &rarr; NO_COVERAGE<br/>
+
+2. entrySet : replaced return value with Collections.emptySet for org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::entrySet &rarr; NO_COVERAGE<br/>
+
+3. entrySet : removed call to org/apache/commons/collections4/MultiSet::entrySet &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        return decorated().entrySet();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_73'/>
+73
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_73'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_74'/>
+74
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_74'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_75'/>
+75
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_75'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_76'/>
+76
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_76'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public boolean equals(final Object object) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_77'/>
+77
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_77'>10</a>
+<span>
+
+1. equals : removed conditional - replaced equality check with true &rarr; SURVIVED<br/>
+
+2. equals : Substituted 1 with 0 &rarr; KILLED<br/>
+
+3. equals : negated conditional &rarr; KILLED<br/>
+
+4. equals : Substituted 0 with 1 &rarr; KILLED<br/>
+
+5. equals : replaced boolean return with true for org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::equals &rarr; KILLED<br/>
+
+6. equals : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+7. equals : removed call to org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::decorated &rarr; KILLED<br/>
+
+8. equals : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+9. equals : removed call to org/apache/commons/collections4/MultiSet::equals &rarr; KILLED<br/>
+
+10. equals : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        return object == this || decorated().equals(object);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_78'/>
+78
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_78'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_79'/>
+79
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_79'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_80'/>
+80
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_80'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_81'/>
+81
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_81'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public int getCount(final Object object) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_82'/>
+82
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_82'>3</a>
+<span>
+
+1. getCount : removed call to org/apache/commons/collections4/MultiSet::getCount &rarr; KILLED<br/>
+
+2. getCount : removed call to org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::decorated &rarr; KILLED<br/>
+
+3. getCount : replaced int return with 0 for org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::getCount &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return decorated().getCount(object);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_83'/>
+83
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_83'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_84'/>
+84
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_84'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_85'/>
+85
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_85'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_86'/>
+86
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_86'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public int hashCode() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_87'/>
+87
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_87'>3</a>
+<span>
+
+1. hashCode : replaced int return with 0 for org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::hashCode &rarr; SURVIVED<br/>
+
+2. hashCode : removed call to org/apache/commons/collections4/MultiSet::hashCode &rarr; SURVIVED<br/>
+
+3. hashCode : removed call to org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::decorated &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        return decorated().hashCode();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_88'/>
+88
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_88'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_89'/>
+89
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_89'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_90'/>
+90
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_90'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_91'/>
+91
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_91'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public int remove(final Object object, final int count) {</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_92'/>
+92
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_92'>4</a>
+<span>
+
+1. remove : removed call to org/apache/commons/collections4/MultiSet::remove &rarr; NO_COVERAGE<br/>
+
+2. remove : replaced int return with 0 for org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::remove &rarr; NO_COVERAGE<br/>
+
+3. remove : replaced call to org/apache/commons/collections4/MultiSet::remove with argument &rarr; NO_COVERAGE<br/>
+
+4. remove : removed call to org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::decorated &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        return decorated().remove(object, count);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_93'/>
+93
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_93'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_94'/>
+94
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_94'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_95'/>
+95
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_95'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_96'/>
+96
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_96'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public int setCount(final E object, final int count) {</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_97'/>
+97
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_97'>4</a>
+<span>
+
+1. setCount : replaced int return with 0 for org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::setCount &rarr; NO_COVERAGE<br/>
+
+2. setCount : replaced call to org/apache/commons/collections4/MultiSet::setCount with argument &rarr; NO_COVERAGE<br/>
+
+3. setCount : removed call to org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::decorated &rarr; NO_COVERAGE<br/>
+
+4. setCount : removed call to org/apache/commons/collections4/MultiSet::setCount &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        return decorated().setCount(object, count);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_98'/>
+98
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_98'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_99'/>
+99
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_99'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_100'/>
+100
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_100'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_101'/>
+101
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_101'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public Set&#60;E&#62; uniqueSet() {</span></pre></td></tr>
+
+
+<tr>
+<td class='uncovered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_102'/>
+102
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_102'>3</a>
+<span>
+
+1. uniqueSet : removed call to org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::decorated &rarr; NO_COVERAGE<br/>
+
+2. uniqueSet : replaced return value with Collections.emptySet for org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::uniqueSet &rarr; NO_COVERAGE<br/>
+
+3. uniqueSet : removed call to org/apache/commons/collections4/MultiSet::uniqueSet &rarr; NO_COVERAGE<br/>
+
+</span>
+</span>
+</td>
+<td class='uncovered'><pre><span  class='survived'>        return decorated().uniqueSet();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_103'/>
+103
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_103'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_104'/>
+104
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_104'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_105'/>
+105
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_105'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_57'>57</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_57'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>add<br/><b>Killed by : </b>none</span></span> removed call to org/apache/commons/collections4/MultiSet::add &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>add<br/><b>Killed by : </b>none</span></span> replaced call to org/apache/commons/collections4/MultiSet::add with argument &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>add<br/><b>Killed by : </b>none</span></span> replaced int return with 0 for org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::add &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>add<br/><b>Killed by : </b>none</span></span> removed call to org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::decorated &rarr; NO_COVERAGE</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_67'>67</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_67'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>decorated<br/><b>Killed by : </b>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testObjectHashCodeEqualsSelfHashCode()]</span></span> replaced return value with null for org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::decorated &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>decorated<br/><b>Killed by : </b>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testObjectHashCodeEqualsSelfHashCode()]</span></span> removed call to org/apache/commons/collections4/collection/AbstractCollectionDecorator::decorated &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_72'>72</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_72'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>entrySet<br/><b>Killed by : </b>none</span></span> removed call to org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::decorated &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>entrySet<br/><b>Killed by : </b>none</span></span> replaced return value with Collections.emptySet for org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::entrySet &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>entrySet<br/><b>Killed by : </b>none</span></span> removed call to org/apache/commons/collections4/MultiSet::entrySet &rarr; NO_COVERAGE</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_77'>77</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_77'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testObjectEqualsSelf()]</span></span> Substituted 1 with 0 &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testEqualsNull()]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testEqualsNull()]</span></span> Substituted 0 with 1 &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testEqualsNull()]</span></span> replaced boolean return with true for org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::equals &rarr; KILLED</p> <p class='KILLED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testEmptyMultiSetCompatibility()]</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>6.<span><b>6</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testEqualsNull()]</span></span> removed call to org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::decorated &rarr; KILLED</p> <p class='KILLED'><span class='pop'>7.<span><b>7</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testEqualsNull()]</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> <p class='KILLED'><span class='pop'>8.<span><b>8</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testEmptyMultiSetCompatibility()]</span></span> removed call to org/apache/commons/collections4/MultiSet::equals &rarr; KILLED</p> <p class='SURVIVED'><span class='pop'>9.<span><b>9</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>none</span></span> removed conditional - replaced equality check with true &rarr; SURVIVED</p> <p class='KILLED'><span class='pop'>10.<span><b>10</b><br/><b>Location : </b>equals<br/><b>Killed by : </b>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testEqualsNull()]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_82'>82</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_82'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>getCount<br/><b>Killed by : </b>org.apache.commons.collections4.MultiSetUtilsTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.MultiSetUtilsTest]/[method:testUnmodifiableMultiSet()]</span></span> removed call to org/apache/commons/collections4/MultiSet::getCount &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>getCount<br/><b>Killed by : </b>org.apache.commons.collections4.MultiSetUtilsTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.MultiSetUtilsTest]/[method:testUnmodifiableMultiSet()]</span></span> removed call to org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::decorated &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>getCount<br/><b>Killed by : </b>org.apache.commons.collections4.MultiSetUtilsTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.MultiSetUtilsTest]/[method:testUnmodifiableMultiSet()]</span></span> replaced int return with 0 for org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::getCount &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_87'>87</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_87'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>hashCode<br/><b>Killed by : </b>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testObjectHashCodeEqualsSelfHashCode()]</span></span> removed call to org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::decorated &rarr; KILLED</p> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>hashCode<br/><b>Killed by : </b>none</span></span> replaced int return with 0 for org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::hashCode &rarr; SURVIVED</p> <p class='SURVIVED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>hashCode<br/><b>Killed by : </b>none</span></span> removed call to org/apache/commons/collections4/MultiSet::hashCode &rarr; SURVIVED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_92'>92</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_92'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>remove<br/><b>Killed by : </b>none</span></span> removed call to org/apache/commons/collections4/MultiSet::remove &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>remove<br/><b>Killed by : </b>none</span></span> replaced int return with 0 for org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::remove &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>remove<br/><b>Killed by : </b>none</span></span> replaced call to org/apache/commons/collections4/MultiSet::remove with argument &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>remove<br/><b>Killed by : </b>none</span></span> removed call to org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::decorated &rarr; NO_COVERAGE</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_97'>97</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_97'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>setCount<br/><b>Killed by : </b>none</span></span> replaced int return with 0 for org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::setCount &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>setCount<br/><b>Killed by : </b>none</span></span> replaced call to org/apache/commons/collections4/MultiSet::setCount with argument &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>setCount<br/><b>Killed by : </b>none</span></span> removed call to org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::decorated &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>setCount<br/><b>Killed by : </b>none</span></span> removed call to org/apache/commons/collections4/MultiSet::setCount &rarr; NO_COVERAGE</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@6cf7aa99_102'>102</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@6cf7aa99_102'/> 
+
+<p class='NO_COVERAGE'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>uniqueSet<br/><b>Killed by : </b>none</span></span> removed call to org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::decorated &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>uniqueSet<br/><b>Killed by : </b>none</span></span> replaced return value with Collections.emptySet for org/apache/commons/collections4/multiset/AbstractMultiSetDecorator::uniqueSet &rarr; NO_COVERAGE</p> <p class='NO_COVERAGE'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>uniqueSet<br/><b>Killed by : </b>none</span></span> removed call to org/apache/commons/collections4/MultiSet::uniqueSet &rarr; NO_COVERAGE</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+
+<li class='mutator'>CONDITIONALS_BOUNDARY</li>
+
+<li class='mutator'>CONSTRUCTOR_CALLS</li>
+
+<li class='mutator'>EMPTY_RETURNS</li>
+
+<li class='mutator'>EXPERIMENTAL_ARGUMENT_PROPAGATION</li>
+
+<li class='mutator'>EXPERIMENTAL_BIG_DECIMAL</li>
+
+<li class='mutator'>EXPERIMENTAL_BIG_INTEGER</li>
+
+<li class='mutator'>EXPERIMENTAL_MEMBER_VARIABLE</li>
+
+<li class='mutator'>EXPERIMENTAL_NAKED_RECEIVER</li>
+
+<li class='mutator'>EXPERIMENTAL_REMOVE_SWITCH_MUTATOR_[0-99]</li>
+
+<li class='mutator'>EXPERIMENTAL_SWITCH</li>
+
+<li class='mutator'>FALSE_RETURNS</li>
+
+<li class='mutator'>INCREMENTS</li>
+
+<li class='mutator'>INLINE_CONSTS</li>
+
+<li class='mutator'>INVERT_NEGS</li>
+
+<li class='mutator'>MATH</li>
+
+<li class='mutator'>NEGATE_CONDITIONALS</li>
+
+<li class='mutator'>NON_VOID_METHOD_CALLS</li>
+
+<li class='mutator'>NULL_RETURNS</li>
+
+<li class='mutator'>PRIMITIVE_RETURNS</li>
+
+<li class='mutator'>REMOVE_CONDITIONALS_EQUAL_ELSE</li>
+
+<li class='mutator'>REMOVE_CONDITIONALS_EQUAL_IF</li>
+
+<li class='mutator'>REMOVE_CONDITIONALS_ORDER_ELSE</li>
+
+<li class='mutator'>REMOVE_CONDITIONALS_ORDER_IF</li>
+
+<li class='mutator'>REMOVE_INCREMENTS</li>
+
+<li class='mutator'>TRUE_RETURNS</li>
+
+<li class='mutator'>VOID_METHOD_CALLS</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>org.apache.commons.collections4.MultiSetUtilsTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.MultiSetUtilsTest]/[method:testUnmodifiableMultiSet()] (1 ms)</li><li>org.apache.commons.collections4.multimap.ArrayListValuedHashMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multimap.ArrayListValuedHashMapTest]/[method:testKeysMultiSet()] (0 ms)</li><li>org.apache.commons.collections4.multimap.ArrayListValuedLinkedHashMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multimap.ArrayListValuedLinkedHashMapTest]/[method:testKeysMultiSet()] (0 ms)</li><li>org.apache.commons.collections4.multimap.LinkedHashSetValuedLinkedHashMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multimap.LinkedHashSetValuedLinkedHashMapTest]/[method:testKeysMultiSet()] (0 ms)</li><li>org.apache.commons.collections4.multimap.HashSetValuedHashMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multimap.HashSetValuedHashMapTest]/[method:testKeysMultiSet()] (0 ms)</li><li>org.apache.commons.collections4.multimap.UnmodifiableMultiValuedMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multimap.UnmodifiableMultiValuedMapTest]/[method:testKeysMultiSet()] (0 ms)</li><li>org.apache.commons.collections4.multimap.TransformedMultiValuedMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multimap.TransformedMultiValuedMapTest]/[method:testKeysMultiSet()] (0 ms)</li><li>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testFullMultiSetCompatibility()] (2 ms)</li><li>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testObjectEqualsSelf()] (0 ms)</li><li>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testMultiSetEqualsSelf()] (0 ms)</li><li>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testObjectHashCodeEqualsContract()] (0 ms)</li><li>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testEmptyMultiSetCompatibility()] (0 ms)</li><li>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testObjectHashCodeEqualsSelfHashCode()] (0 ms)</li><li>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testEqualsNull()] (0 ms)</li><li>org.apache.commons.collections4.MultiSetUtilsTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.MultiSetUtilsTest]/[method:testEmptyMultiSet()] (3 ms)</li><li>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testSimpleSerialization()] (1 ms)</li><li>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testCollectionSize()] (0 ms)</li><li>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testEntrySet()] (0 ms)</li><li>org.apache.commons.collections4.multimap.LinkedHashSetValuedLinkedHashMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multimap.LinkedHashSetValuedLinkedHashMapTest]/[method:testKeysBagContainsAll()] (0 ms)</li><li>org.apache.commons.collections4.multimap.HashSetValuedHashMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multimap.HashSetValuedHashMapTest]/[method:testKeysBagContainsAll()] (0 ms)</li><li>org.apache.commons.collections4.multimap.ArrayListValuedLinkedHashMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multimap.ArrayListValuedLinkedHashMapTest]/[method:testKeysBagContainsAll()] (0 ms)</li><li>org.apache.commons.collections4.multimap.ArrayListValuedHashMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multimap.ArrayListValuedHashMapTest]/[method:testKeysBagContainsAll()] (1 ms)</li><li>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testCollectionToString()] (0 ms)</li><li>org.apache.commons.collections4.multimap.UnmodifiableMultiValuedMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multimap.UnmodifiableMultiValuedMapTest]/[method:testKeysBagContainsAll()] (0 ms)</li><li>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testSerializeDeserializeThenCompare()] (0 ms)</li><li>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testCollectionToArray()] (0 ms)</li><li>org.apache.commons.collections4.multimap.TransformedMultiValuedMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multimap.TransformedMultiValuedMapTest]/[method:testKeysBagContainsAll()] (0 ms)</li><li>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testCollectionIsEmpty()] (0 ms)</li><li>org.apache.commons.collections4.multimap.UnmodifiableMultiValuedMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multimap.UnmodifiableMultiValuedMapTest]/[method:testUnmodifiableKeys()] (1 ms)</li><li>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testCollectionIterator()] (0 ms)</li><li>org.apache.commons.collections4.multimap.LinkedHashSetValuedLinkedHashMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multimap.LinkedHashSetValuedLinkedHashMapTest]/[method:testKeysBagIterator2()] (0 ms)</li><li>org.apache.commons.collections4.multimap.HashSetValuedHashMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multimap.HashSetValuedHashMapTest]/[method:testKeysBagIterator2()] (0 ms)</li><li>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testUnsupportedRemove()] (0 ms)</li><li>org.apache.commons.collections4.multimap.ArrayListValuedLinkedHashMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multimap.ArrayListValuedLinkedHashMapTest]/[method:testKeysBagIterator2()] (0 ms)</li><li>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testUnsupportedAdd()] (0 ms)</li><li>org.apache.commons.collections4.multimap.UnmodifiableMultiValuedMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multimap.UnmodifiableMultiValuedMapTest]/[method:testKeysBagIterator2()] (0 ms)</li><li>org.apache.commons.collections4.multimap.HashSetValuedHashMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multimap.HashSetValuedHashMapTest]/[method:testKeysBagIterator1()] (0 ms)</li><li>org.apache.commons.collections4.multimap.LinkedHashSetValuedLinkedHashMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multimap.LinkedHashSetValuedLinkedHashMapTest]/[method:testKeysBagIterator1()] (0 ms)</li><li>org.apache.commons.collections4.multimap.ArrayListValuedLinkedHashMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multimap.ArrayListValuedLinkedHashMapTest]/[method:testKeysBagIterator1()] (1 ms)</li><li>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testCollectionContains()] (0 ms)</li><li>org.apache.commons.collections4.multimap.TransformedMultiValuedMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multimap.TransformedMultiValuedMapTest]/[method:testKeysBagIterator2()] (0 ms)</li><li>org.apache.commons.collections4.multimap.UnmodifiableMultiValuedMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multimap.UnmodifiableMultiValuedMapTest]/[method:testKeysBagIterator1()] (1 ms)</li><li>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testCollectionContainsAll()] (0 ms)</li><li>org.apache.commons.collections4.multimap.ArrayListValuedHashMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multimap.ArrayListValuedHashMapTest]/[method:testKeysBagIterator2()] (5 ms)</li><li>org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multiset.UnmodifiableMultiSetTest]/[method:testCollectionToArray2()] (0 ms)</li><li>org.apache.commons.collections4.multimap.TransformedMultiValuedMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multimap.TransformedMultiValuedMapTest]/[method:testKeysBagIterator1()] (1 ms)</li><li>org.apache.commons.collections4.multimap.ArrayListValuedHashMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.multimap.ArrayListValuedHashMapTest]/[method:testKeysBagIterator1()] (10 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='https://pitest.org'>PIT</a> 1.15.0
+
+</body>
+</html>

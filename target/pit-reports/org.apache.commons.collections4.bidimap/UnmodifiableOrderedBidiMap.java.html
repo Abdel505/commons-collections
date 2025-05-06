@@ -1,0 +1,2597 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>UnmodifiableOrderedBidiMap.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/*</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Licensed to the Apache Software Foundation (ASF) under one or more</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * contributor license agreements.  See the NOTICE file distributed with</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * this work for additional information regarding copyright ownership.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * The ASF licenses this file to You under the Apache License, Version 2.0</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * (the &#34;License&#34;); you may not use this file except in compliance with</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * the License.  You may obtain a copy of the License at</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *      http://www.apache.org/licenses/LICENSE-2.0</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Unless required by applicable law or agreed to in writing, software</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_12'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * distributed under the License is distributed on an &#34;AS IS&#34; BASIS,</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_13'/>
+13
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_13'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_14'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * See the License for the specific language governing permissions and</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_15'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * limitations under the License.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_16'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_17'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package org.apache.commons.collections4.bidimap;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_18'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_19'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.Map;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_20'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import java.util.Set;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_21'/>
+21
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_21'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_22'/>
+22
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_22'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.apache.commons.collections4.OrderedBidiMap;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_23'/>
+23
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_23'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.apache.commons.collections4.OrderedMapIterator;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_24'/>
+24
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_24'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.apache.commons.collections4.Unmodifiable;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_25'/>
+25
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_25'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.apache.commons.collections4.iterators.UnmodifiableOrderedMapIterator;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_26'/>
+26
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_26'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.apache.commons.collections4.map.UnmodifiableEntrySet;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_27'/>
+27
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_27'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>import org.apache.commons.collections4.set.UnmodifiableSet;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_28'/>
+28
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_28'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_29'/>
+29
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_29'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_30'/>
+30
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_30'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Decorates another {@link OrderedBidiMap} to ensure it can&#39;t be altered.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_31'/>
+31
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_31'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * &#60;p&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_32'/>
+32
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_32'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Attempts to modify it will result in an UnsupportedOperationException.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_33'/>
+33
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_33'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * &#60;/p&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_34'/>
+34
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_34'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_35'/>
+35
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_35'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * @param &#60;K&#62; the type of the keys in this map</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_36'/>
+36
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_36'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * @param &#60;V&#62; the type of the values in this map</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_37'/>
+37
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_37'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * @since 3.0</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_38'/>
+38
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_38'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_39'/>
+39
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_39'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>public final class UnmodifiableOrderedBidiMap&#60;K, V&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_40'/>
+40
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_40'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        extends AbstractOrderedBidiMapDecorator&#60;K, V&#62; implements Unmodifiable {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_41'/>
+41
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_41'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_42'/>
+42
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_42'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_43'/>
+43
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_43'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Factory method to create an unmodifiable map.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_44'/>
+44
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_44'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * &#60;p&#62;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_45'/>
+45
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_45'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * If the map passed in is already unmodifiable, it is returned.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_46'/>
+46
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_46'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_47'/>
+47
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_47'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param &#60;K&#62; the key type</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_48'/>
+48
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_48'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param &#60;V&#62; the value type</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_49'/>
+49
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_49'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param map  the map to decorate, must not be null</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_50'/>
+50
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_50'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @return an unmodifiable OrderedBidiMap</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_51'/>
+51
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_51'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @throws NullPointerException if map is null</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_52'/>
+52
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_52'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @since 4.0</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_53'/>
+53
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_53'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_54'/>
+54
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_54'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public static &#60;K, V&#62; OrderedBidiMap&#60;K, V&#62; unmodifiableOrderedBidiMap(</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_55'/>
+55
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_55'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            final OrderedBidiMap&#60;? extends K, ? extends V&#62; map) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_56'/>
+56
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_56'>3</a>
+<span>
+
+1. unmodifiableOrderedBidiMap : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+2. unmodifiableOrderedBidiMap : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+3. unmodifiableOrderedBidiMap : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (map instanceof Unmodifiable) {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_57'/>
+57
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_57'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>            @SuppressWarnings(&#34;unchecked&#34;) // safe to upcast</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_58'/>
+58
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_58'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            final OrderedBidiMap&#60;K, V&#62; tmpMap = (OrderedBidiMap&#60;K, V&#62;) map;</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_59'/>
+59
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_59'>1</a>
+<span>
+
+1. unmodifiableOrderedBidiMap : replaced return value with null for org/apache/commons/collections4/bidimap/UnmodifiableOrderedBidiMap::unmodifiableOrderedBidiMap &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            return tmpMap;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_60'/>
+60
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_60'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_61'/>
+61
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_61'>2</a>
+<span>
+
+1. unmodifiableOrderedBidiMap : removed call to org/apache/commons/collections4/bidimap/UnmodifiableOrderedBidiMap::&#60;init&#62; &rarr; KILLED<br/>
+
+2. unmodifiableOrderedBidiMap : replaced return value with null for org/apache/commons/collections4/bidimap/UnmodifiableOrderedBidiMap::unmodifiableOrderedBidiMap &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return new UnmodifiableOrderedBidiMap&#60;&#62;(map);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_62'/>
+62
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_62'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_63'/>
+63
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_63'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_64'/>
+64
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_64'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /** The inverse unmodifiable map */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_65'/>
+65
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_65'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private UnmodifiableOrderedBidiMap&#60;V, K&#62; inverse;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_66'/>
+66
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_66'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_67'/>
+67
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_67'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_68'/>
+68
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_68'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Constructor that wraps (not copies).</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_69'/>
+69
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_69'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_70'/>
+70
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_70'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @param map  the map to decorate, must not be null</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_71'/>
+71
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_71'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @throws NullPointerException if map is null</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_72'/>
+72
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_72'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_73'/>
+73
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_73'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @SuppressWarnings(&#34;unchecked&#34;) // safe to upcast</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_74'/>
+74
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_74'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private UnmodifiableOrderedBidiMap(final OrderedBidiMap&#60;? extends K, ? extends V&#62; map) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_75'/>
+75
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_75'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        super((OrderedBidiMap&#60;K, V&#62;) map);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_76'/>
+76
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_76'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_77'/>
+77
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_77'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_78'/>
+78
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_78'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_79'/>
+79
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_79'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void clear() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_80'/>
+80
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_80'>1</a>
+<span>
+
+1. clear : removed call to java/lang/UnsupportedOperationException::&#60;init&#62; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        throw new UnsupportedOperationException();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_81'/>
+81
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_81'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_82'/>
+82
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_82'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_83'/>
+83
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_83'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_84'/>
+84
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_84'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public Set&#60;Map.Entry&#60;K, V&#62;&#62; entrySet() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_85'/>
+85
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_85'>1</a>
+<span>
+
+1. entrySet : removed call to org/apache/commons/collections4/bidimap/AbstractOrderedBidiMapDecorator::entrySet &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        final Set&#60;Map.Entry&#60;K, V&#62;&#62; set = super.entrySet();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_86'/>
+86
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_86'>3</a>
+<span>
+
+1. entrySet : replaced call to org/apache/commons/collections4/map/UnmodifiableEntrySet::unmodifiableEntrySet with argument &rarr; SURVIVED<br/>
+
+2. entrySet : removed call to org/apache/commons/collections4/map/UnmodifiableEntrySet::unmodifiableEntrySet &rarr; KILLED<br/>
+
+3. entrySet : replaced return value with Collections.emptySet for org/apache/commons/collections4/bidimap/UnmodifiableOrderedBidiMap::entrySet &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        return UnmodifiableEntrySet.unmodifiableEntrySet(set);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_87'/>
+87
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_87'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_88'/>
+88
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_88'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_89'/>
+89
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_89'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_90'/>
+90
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_90'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public OrderedBidiMap&#60;V, K&#62; inverseBidiMap() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_91'/>
+91
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_91'>2</a>
+<span>
+
+1. inverseBidiMap : replaced return value with null for org/apache/commons/collections4/bidimap/UnmodifiableOrderedBidiMap::inverseBidiMap &rarr; KILLED<br/>
+
+2. inverseBidiMap : removed call to org/apache/commons/collections4/bidimap/UnmodifiableOrderedBidiMap::inverseOrderedBidiMap &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return inverseOrderedBidiMap();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_92'/>
+92
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_92'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_93'/>
+93
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_93'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_94'/>
+94
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_94'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    /**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_95'/>
+95
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_95'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * Gets an unmodifiable view of this map where the keys and values are reversed.</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_96'/>
+96
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_96'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     *</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_97'/>
+97
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_97'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     * @return an inverted unmodifiable bidirectional map</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_98'/>
+98
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_98'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>     */</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_99'/>
+99
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_99'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public OrderedBidiMap&#60;V, K&#62; inverseOrderedBidiMap() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_100'/>
+100
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_100'>3</a>
+<span>
+
+1. inverseOrderedBidiMap : negated conditional &rarr; KILLED<br/>
+
+2. inverseOrderedBidiMap : removed conditional - replaced equality check with true &rarr; KILLED<br/>
+
+3. inverseOrderedBidiMap : removed conditional - replaced equality check with false &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        if (inverse == null) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_101'/>
+101
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_101'>5</a>
+<span>
+
+1. inverseOrderedBidiMap : removed call to org/apache/commons/collections4/OrderedBidiMap::inverseBidiMap &rarr; KILLED<br/>
+
+2. inverseOrderedBidiMap : removed call to org/apache/commons/collections4/bidimap/UnmodifiableOrderedBidiMap::&#60;init&#62; &rarr; KILLED<br/>
+
+3. inverseOrderedBidiMap : removed call to org/apache/commons/collections4/bidimap/UnmodifiableOrderedBidiMap::decorated &rarr; KILLED<br/>
+
+4. inverseOrderedBidiMap : replaced call to org/apache/commons/collections4/OrderedBidiMap::inverseBidiMap with receiver &rarr; KILLED<br/>
+
+5. inverseOrderedBidiMap : Removed assignment to member variable inverse &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            inverse = new UnmodifiableOrderedBidiMap&#60;&#62;(decorated().inverseBidiMap());</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_102'/>
+102
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_102'>1</a>
+<span>
+
+1. inverseOrderedBidiMap : Removed assignment to member variable inverse &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>            inverse.inverse = this;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_103'/>
+103
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_103'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_104'/>
+104
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_104'>1</a>
+<span>
+
+1. inverseOrderedBidiMap : replaced return value with null for org/apache/commons/collections4/bidimap/UnmodifiableOrderedBidiMap::inverseOrderedBidiMap &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return inverse;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_105'/>
+105
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_105'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_106'/>
+106
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_106'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_107'/>
+107
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_107'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_108'/>
+108
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_108'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public Set&#60;K&#62; keySet() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_109'/>
+109
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_109'>1</a>
+<span>
+
+1. keySet : removed call to org/apache/commons/collections4/bidimap/AbstractOrderedBidiMapDecorator::keySet &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        final Set&#60;K&#62; set = super.keySet();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_110'/>
+110
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_110'>3</a>
+<span>
+
+1. keySet : replaced call to org/apache/commons/collections4/set/UnmodifiableSet::unmodifiableSet with argument &rarr; SURVIVED<br/>
+
+2. keySet : replaced return value with Collections.emptySet for org/apache/commons/collections4/bidimap/UnmodifiableOrderedBidiMap::keySet &rarr; KILLED<br/>
+
+3. keySet : removed call to org/apache/commons/collections4/set/UnmodifiableSet::unmodifiableSet &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        return UnmodifiableSet.unmodifiableSet(set);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_111'/>
+111
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_111'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_112'/>
+112
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_112'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_113'/>
+113
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_113'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_114'/>
+114
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_114'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public OrderedMapIterator&#60;K, V&#62; mapIterator() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_115'/>
+115
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_115'>2</a>
+<span>
+
+1. mapIterator : removed call to org/apache/commons/collections4/OrderedBidiMap::mapIterator &rarr; KILLED<br/>
+
+2. mapIterator : removed call to org/apache/commons/collections4/bidimap/UnmodifiableOrderedBidiMap::decorated &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        final OrderedMapIterator&#60;K, V&#62; it = decorated().mapIterator();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_116'/>
+116
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_116'>3</a>
+<span>
+
+1. mapIterator : replaced call to org/apache/commons/collections4/iterators/UnmodifiableOrderedMapIterator::unmodifiableOrderedMapIterator with argument &rarr; SURVIVED<br/>
+
+2. mapIterator : removed call to org/apache/commons/collections4/iterators/UnmodifiableOrderedMapIterator::unmodifiableOrderedMapIterator &rarr; KILLED<br/>
+
+3. mapIterator : replaced return value with null for org/apache/commons/collections4/bidimap/UnmodifiableOrderedBidiMap::mapIterator &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        return UnmodifiableOrderedMapIterator.unmodifiableOrderedMapIterator(it);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_117'/>
+117
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_117'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_118'/>
+118
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_118'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_119'/>
+119
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_119'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_120'/>
+120
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_120'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public V put(final K key, final V value) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_121'/>
+121
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_121'>1</a>
+<span>
+
+1. put : removed call to java/lang/UnsupportedOperationException::&#60;init&#62; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        throw new UnsupportedOperationException();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_122'/>
+122
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_122'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_123'/>
+123
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_123'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_124'/>
+124
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_124'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_125'/>
+125
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_125'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void putAll(final Map&#60;? extends K, ? extends V&#62; mapToCopy) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_126'/>
+126
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_126'>1</a>
+<span>
+
+1. putAll : removed call to java/lang/UnsupportedOperationException::&#60;init&#62; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        throw new UnsupportedOperationException();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_127'/>
+127
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_127'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_128'/>
+128
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_128'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_129'/>
+129
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_129'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_130'/>
+130
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_130'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public V remove(final Object key) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_131'/>
+131
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_131'>1</a>
+<span>
+
+1. remove : removed call to java/lang/UnsupportedOperationException::&#60;init&#62; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        throw new UnsupportedOperationException();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_132'/>
+132
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_132'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_133'/>
+133
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_133'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_134'/>
+134
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_134'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_135'/>
+135
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_135'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public K removeValue(final Object value) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_136'/>
+136
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_136'>1</a>
+<span>
+
+1. removeValue : removed call to java/lang/UnsupportedOperationException::&#60;init&#62; &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        throw new UnsupportedOperationException();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_137'/>
+137
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_137'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_138'/>
+138
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_138'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_139'/>
+139
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_139'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_140'/>
+140
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_140'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public Set&#60;V&#62; values() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_141'/>
+141
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_141'>1</a>
+<span>
+
+1. values : removed call to org/apache/commons/collections4/bidimap/AbstractOrderedBidiMapDecorator::values &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        final Set&#60;V&#62; set = super.values();</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_142'/>
+142
+</td>
+<td class='survived'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_142'>3</a>
+<span>
+
+1. values : replaced call to org/apache/commons/collections4/set/UnmodifiableSet::unmodifiableSet with argument &rarr; SURVIVED<br/>
+
+2. values : replaced return value with Collections.emptySet for org/apache/commons/collections4/bidimap/UnmodifiableOrderedBidiMap::values &rarr; KILLED<br/>
+
+3. values : removed call to org/apache/commons/collections4/set/UnmodifiableSet::unmodifiableSet &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='survived'>        return UnmodifiableSet.unmodifiableSet(set);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_143'/>
+143
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_143'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_144'/>
+144
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_144'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@1113ed93_145'/>
+145
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_145'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1113ed93_56'>56</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_56'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>unmodifiableOrderedBidiMap<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testDecorateFactory()]</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>unmodifiableOrderedBidiMap<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testMapPut()]</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>unmodifiableOrderedBidiMap<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testMapPut()]</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1113ed93_59'>59</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_59'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>unmodifiableOrderedBidiMap<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testDecorateFactory()]</span></span> replaced return value with null for org/apache/commons/collections4/bidimap/UnmodifiableOrderedBidiMap::unmodifiableOrderedBidiMap &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1113ed93_61'>61</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_61'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>unmodifiableOrderedBidiMap<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testObjectHashCodeEqualsSelfHashCode()]</span></span> removed call to org/apache/commons/collections4/bidimap/UnmodifiableOrderedBidiMap::&#60;init&#62; &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>unmodifiableOrderedBidiMap<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testObjectHashCodeEqualsSelfHashCode()]</span></span> replaced return value with null for org/apache/commons/collections4/bidimap/UnmodifiableOrderedBidiMap::unmodifiableOrderedBidiMap &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1113ed93_80'>80</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_80'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>clear<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testBidiClear()]</span></span> removed call to java/lang/UnsupportedOperationException::&#60;init&#62; &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1113ed93_85'>85</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_85'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>entrySet<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testMapPut()]</span></span> removed call to org/apache/commons/collections4/bidimap/AbstractOrderedBidiMapDecorator::entrySet &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1113ed93_86'>86</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_86'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>entrySet<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testEntrySetRemoveChangesMap()]</span></span> removed call to org/apache/commons/collections4/map/UnmodifiableEntrySet::unmodifiableEntrySet &rarr; KILLED</p> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>entrySet<br/><b>Killed by : </b>none</span></span> replaced call to org/apache/commons/collections4/map/UnmodifiableEntrySet::unmodifiableEntrySet with argument &rarr; SURVIVED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>entrySet<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testEntrySetRemoveChangesMap()]</span></span> replaced return value with Collections.emptySet for org/apache/commons/collections4/bidimap/UnmodifiableOrderedBidiMap::entrySet &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1113ed93_91'>91</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_91'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>inverseBidiMap<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testBidiGetKeyInverse()]</span></span> replaced return value with null for org/apache/commons/collections4/bidimap/UnmodifiableOrderedBidiMap::inverseBidiMap &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>inverseBidiMap<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testBidiGetKeyInverse()]</span></span> removed call to org/apache/commons/collections4/bidimap/UnmodifiableOrderedBidiMap::inverseOrderedBidiMap &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1113ed93_100'>100</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_100'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>inverseOrderedBidiMap<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testBidiGetKeyInverse()]</span></span> negated conditional &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>inverseOrderedBidiMap<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testBidiInverse()]</span></span> removed conditional - replaced equality check with true &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>inverseOrderedBidiMap<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testBidiGetKeyInverse()]</span></span> removed conditional - replaced equality check with false &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1113ed93_101'>101</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_101'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>inverseOrderedBidiMap<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testBidiGetKeyInverse()]</span></span> removed call to org/apache/commons/collections4/OrderedBidiMap::inverseBidiMap &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>inverseOrderedBidiMap<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testBidiGetKeyInverse()]</span></span> removed call to org/apache/commons/collections4/bidimap/UnmodifiableOrderedBidiMap::&#60;init&#62; &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>inverseOrderedBidiMap<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testBidiGetKeyInverse()]</span></span> removed call to org/apache/commons/collections4/bidimap/UnmodifiableOrderedBidiMap::decorated &rarr; KILLED</p> <p class='KILLED'><span class='pop'>4.<span><b>4</b><br/><b>Location : </b>inverseOrderedBidiMap<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testBidiGetKeyInverse()]</span></span> replaced call to org/apache/commons/collections4/OrderedBidiMap::inverseBidiMap with receiver &rarr; KILLED</p> <p class='KILLED'><span class='pop'>5.<span><b>5</b><br/><b>Location : </b>inverseOrderedBidiMap<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testBidiGetKeyInverse()]</span></span> Removed assignment to member variable inverse &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1113ed93_102'>102</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_102'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>inverseOrderedBidiMap<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testBidiInverse()]</span></span> Removed assignment to member variable inverse &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1113ed93_104'>104</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_104'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>inverseOrderedBidiMap<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testBidiGetKeyInverse()]</span></span> replaced return value with null for org/apache/commons/collections4/bidimap/UnmodifiableOrderedBidiMap::inverseOrderedBidiMap &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1113ed93_109'>109</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_109'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>keySet<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testMapPut()]</span></span> removed call to org/apache/commons/collections4/bidimap/AbstractOrderedBidiMapDecorator::keySet &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1113ed93_110'>110</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_110'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>keySet<br/><b>Killed by : </b>none</span></span> replaced call to org/apache/commons/collections4/set/UnmodifiableSet::unmodifiableSet with argument &rarr; SURVIVED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>keySet<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testKeySetRemoveChangesMap()]</span></span> replaced return value with Collections.emptySet for org/apache/commons/collections4/bidimap/UnmodifiableOrderedBidiMap::keySet &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>keySet<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testKeySetRemoveChangesMap()]</span></span> removed call to org/apache/commons/collections4/set/UnmodifiableSet::unmodifiableSet &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1113ed93_115'>115</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_115'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>mapIterator<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testBidiMapIteratorSet()]</span></span> removed call to org/apache/commons/collections4/OrderedBidiMap::mapIterator &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>mapIterator<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testBidiMapIteratorSet()]</span></span> removed call to org/apache/commons/collections4/bidimap/UnmodifiableOrderedBidiMap::decorated &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1113ed93_116'>116</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_116'/> 
+
+<p class='SURVIVED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>mapIterator<br/><b>Killed by : </b>none</span></span> replaced call to org/apache/commons/collections4/iterators/UnmodifiableOrderedMapIterator::unmodifiableOrderedMapIterator with argument &rarr; SURVIVED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>mapIterator<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testBidiMapIteratorSet()]</span></span> removed call to org/apache/commons/collections4/iterators/UnmodifiableOrderedMapIterator::unmodifiableOrderedMapIterator &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>mapIterator<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testBidiMapIteratorSet()]</span></span> replaced return value with null for org/apache/commons/collections4/bidimap/UnmodifiableOrderedBidiMap::mapIterator &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1113ed93_121'>121</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_121'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>put<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testMapPut()]</span></span> removed call to java/lang/UnsupportedOperationException::&#60;init&#62; &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1113ed93_126'>126</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_126'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>putAll<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testMapPutAll()]</span></span> removed call to java/lang/UnsupportedOperationException::&#60;init&#62; &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1113ed93_131'>131</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_131'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>remove<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testBidiRemove()]</span></span> removed call to java/lang/UnsupportedOperationException::&#60;init&#62; &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1113ed93_136'>136</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_136'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>removeValue<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testBidiRemove()]</span></span> removed call to java/lang/UnsupportedOperationException::&#60;init&#62; &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1113ed93_141'>141</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_141'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>values<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testValuesRetainAll()]</span></span> removed call to org/apache/commons/collections4/bidimap/AbstractOrderedBidiMapDecorator::values &rarr; KILLED</p> 
+</td>
+</tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@1113ed93_142'>142</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@1113ed93_142'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>values<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testValuesRemoveChangesMap()]</span></span> replaced return value with Collections.emptySet for org/apache/commons/collections4/bidimap/UnmodifiableOrderedBidiMap::values &rarr; KILLED</p> <p class='SURVIVED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>values<br/><b>Killed by : </b>none</span></span> replaced call to org/apache/commons/collections4/set/UnmodifiableSet::unmodifiableSet with argument &rarr; SURVIVED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>values<br/><b>Killed by : </b>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testValuesRetainAll()]</span></span> removed call to org/apache/commons/collections4/set/UnmodifiableSet::unmodifiableSet &rarr; KILLED</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+
+<li class='mutator'>CONDITIONALS_BOUNDARY</li>
+
+<li class='mutator'>CONSTRUCTOR_CALLS</li>
+
+<li class='mutator'>EMPTY_RETURNS</li>
+
+<li class='mutator'>EXPERIMENTAL_ARGUMENT_PROPAGATION</li>
+
+<li class='mutator'>EXPERIMENTAL_BIG_DECIMAL</li>
+
+<li class='mutator'>EXPERIMENTAL_BIG_INTEGER</li>
+
+<li class='mutator'>EXPERIMENTAL_MEMBER_VARIABLE</li>
+
+<li class='mutator'>EXPERIMENTAL_NAKED_RECEIVER</li>
+
+<li class='mutator'>EXPERIMENTAL_REMOVE_SWITCH_MUTATOR_[0-99]</li>
+
+<li class='mutator'>EXPERIMENTAL_SWITCH</li>
+
+<li class='mutator'>FALSE_RETURNS</li>
+
+<li class='mutator'>INCREMENTS</li>
+
+<li class='mutator'>INLINE_CONSTS</li>
+
+<li class='mutator'>INVERT_NEGS</li>
+
+<li class='mutator'>MATH</li>
+
+<li class='mutator'>NEGATE_CONDITIONALS</li>
+
+<li class='mutator'>NON_VOID_METHOD_CALLS</li>
+
+<li class='mutator'>NULL_RETURNS</li>
+
+<li class='mutator'>PRIMITIVE_RETURNS</li>
+
+<li class='mutator'>REMOVE_CONDITIONALS_EQUAL_ELSE</li>
+
+<li class='mutator'>REMOVE_CONDITIONALS_EQUAL_IF</li>
+
+<li class='mutator'>REMOVE_CONDITIONALS_ORDER_ELSE</li>
+
+<li class='mutator'>REMOVE_CONDITIONALS_ORDER_IF</li>
+
+<li class='mutator'>REMOVE_INCREMENTS</li>
+
+<li class='mutator'>TRUE_RETURNS</li>
+
+<li class='mutator'>VOID_METHOD_CALLS</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testEmptyMapCompatibility()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testSerializeDeserializeThenCompare()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testSimpleSerialization()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testObjectEqualsSelf()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testCanonicalFullCollectionExists()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testCanonicalEmptyCollectionExists()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testObjectHashCodeEqualsSelfHashCode()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testEqualsNull()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testObjectHashCodeEqualsContract()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testMapPut()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testMapComputeIfAbsent()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testMapPutIfAbsent()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testMapComputeIfPresent()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testMapComputeIfPresentOnEmpty()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testFullMapCompatibility()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testDecorateFactory()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testBidiClear()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testUnmodifiable()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testMakeMap()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testBidiRemove()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testBidiGetKey()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testBidiGetKeyInverse()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testBidiInverse()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testKeySetRemoveChangesMap()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testMapPutAll()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testMapPutNullValue()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testMapPutNullKey()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testMapClear()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testEntrySetRemoveChangesMap()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testKeySetRemoveAll()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testKeySetRetainAll()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testValuesRetainAll()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testValuesRemoveAll()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testFirstKey()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testLastKey()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testValuesRemoveChangesMap()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testMapRemove()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testKeySetIteratorRemoveChangesMap()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testNextKey()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testEntrySetIteratorRemoveChangesMap()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testEntrySetContains1()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testBidiMapIteratorSet()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testMapHashCode()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testPreviousKey()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testEntrySetContains2()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testEntrySetContains3()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testValuesIteratorRemoveChangesMap()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testForEach()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testBidiKeySetValuesOrder()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testEntrySetRemoveAll()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testEntrySetRetainAll()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testMapGet()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testMapGetOrDefault()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testMapIsEmpty()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testMapSize()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testMapContainsKey()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testMapContainsValue()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testMapEquals()] (0 ms)</li><li>org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest.[engine:junit-jupiter]/[class:org.apache.commons.collections4.bidimap.UnmodifiableOrderedBidiMapTest]/[method:testMapToString()] (0 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='https://pitest.org'>PIT</a> 1.15.0
+
+</body>
+</html>

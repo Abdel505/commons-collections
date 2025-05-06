@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrderedProperties.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Apache Commons Collections</a> &gt; <a href="index.source.html" class="el_package">org.apache.commons.collections4.properties</a> &gt; <span class="el_source">OrderedProperties.java</span></div><h1>OrderedProperties.java</h1><pre class="source lang-java linenums">/*
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the &quot;License&quot;); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.apache.commons.collections4.properties;
+
+import java.util.AbstractMap.SimpleEntry;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Properties;
+import java.util.Set;
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+/**
+ * A drop-in replacement for {@link Properties} for ordered keys.
+ * &lt;p&gt;
+ * Overrides methods to keep keys in insertion order. Allows other methods in the superclass to work with ordered keys.
+ * &lt;/p&gt;
+ *
+ * @see OrderedPropertiesFactory#INSTANCE
+ * @since 4.5.0-M1
+ */
+public class OrderedProperties extends Properties {
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Preserves the insertion order.
+     */
+<span class="fc" id="L49">    private final LinkedHashSet&lt;Object&gt; orderedKeys = new LinkedHashSet&lt;&gt;();</span>
+
+    /**
+     * Constructs a new instance.
+     */
+<span class="fc" id="L54">    public OrderedProperties() {</span>
+        // empty
+<span class="fc" id="L56">    }</span>
+
+    @Override
+    public synchronized void clear() {
+<span class="fc" id="L60">        orderedKeys.clear();</span>
+<span class="fc" id="L61">        super.clear();</span>
+<span class="fc" id="L62">    }</span>
+
+    @Override
+    public synchronized Object compute(final Object key, final BiFunction&lt;? super Object, ? super Object, ? extends Object&gt; remappingFunction) {
+<span class="fc" id="L66">        final Object compute = super.compute(key, remappingFunction);</span>
+<span class="pc bpc" id="L67" title="1 of 2 branches missed.">        if (compute != null) {</span>
+<span class="fc" id="L68">            orderedKeys.add(key);</span>
+        }
+<span class="fc" id="L70">        return compute;</span>
+    }
+
+    @Override
+    public synchronized Object computeIfAbsent(final Object key, final Function&lt;? super Object, ? extends Object&gt; mappingFunction) {
+<span class="fc" id="L75">        final Object computeIfAbsent = super.computeIfAbsent(key, mappingFunction);</span>
+<span class="pc bpc" id="L76" title="1 of 2 branches missed.">        if (computeIfAbsent != null) {</span>
+<span class="fc" id="L77">            orderedKeys.add(key);</span>
+        }
+<span class="fc" id="L79">        return computeIfAbsent;</span>
+    }
+
+    @Override
+    public Set&lt;Map.Entry&lt;Object, Object&gt;&gt; entrySet() {
+<span class="fc" id="L84">        return orderedKeys.stream().map(k -&gt; new SimpleEntry&lt;&gt;(k, get(k))).collect(Collectors.toCollection(LinkedHashSet::new));</span>
+    }
+
+    @Override
+    public synchronized void forEach(final BiConsumer&lt;? super Object, ? super Object&gt; action) {
+<span class="fc" id="L89">        Objects.requireNonNull(action);</span>
+<span class="fc" id="L90">        orderedKeys.forEach(k -&gt; action.accept(k, get(k)));</span>
+<span class="fc" id="L91">    }</span>
+
+    @Override
+    public synchronized Enumeration&lt;Object&gt; keys() {
+<span class="fc" id="L95">        return Collections.enumeration(orderedKeys);</span>
+    }
+
+    @Override
+    public Set&lt;Object&gt; keySet() {
+<span class="fc" id="L100">        return orderedKeys;</span>
+    }
+
+    @Override
+    public synchronized Object merge(final Object key, final Object value,
+            final BiFunction&lt;? super Object, ? super Object, ? extends Object&gt; remappingFunction) {
+<span class="fc" id="L106">        orderedKeys.add(key);</span>
+<span class="fc" id="L107">        return super.merge(key, value, remappingFunction);</span>
+    }
+
+    @Override
+    public Enumeration&lt;?&gt; propertyNames() {
+<span class="fc" id="L112">        return Collections.enumeration(orderedKeys);</span>
+    }
+
+    @Override
+    public synchronized Object put(final Object key, final Object value) {
+<span class="fc" id="L117">        final Object put = super.put(key, value);</span>
+<span class="pc bpc" id="L118" title="1 of 2 branches missed.">        if (put == null) {</span>
+<span class="fc" id="L119">            orderedKeys.add(key);</span>
+        }
+<span class="fc" id="L121">        return put;</span>
+    }
+
+    @Override
+    public synchronized void putAll(final Map&lt;? extends Object, ? extends Object&gt; t) {
+<span class="fc" id="L126">        orderedKeys.addAll(t.keySet());</span>
+<span class="fc" id="L127">        super.putAll(t);</span>
+<span class="fc" id="L128">    }</span>
+
+    @Override
+    public synchronized Object putIfAbsent(final Object key, final Object value) {
+<span class="fc" id="L132">        final Object putIfAbsent = super.putIfAbsent(key, value);</span>
+<span class="pc bpc" id="L133" title="1 of 2 branches missed.">        if (putIfAbsent == null) {</span>
+<span class="fc" id="L134">            orderedKeys.add(key);</span>
+        }
+<span class="fc" id="L136">        return putIfAbsent;</span>
+    }
+
+    @Override
+    public synchronized Object remove(final Object key) {
+<span class="fc" id="L141">        final Object remove = super.remove(key);</span>
+<span class="pc bpc" id="L142" title="1 of 2 branches missed.">        if (remove != null) {</span>
+<span class="fc" id="L143">            orderedKeys.remove(key);</span>
+        }
+<span class="fc" id="L145">        return remove;</span>
+    }
+
+    @Override
+    public synchronized boolean remove(final Object key, final Object value) {
+<span class="fc" id="L150">        final boolean remove = super.remove(key, value);</span>
+<span class="pc bpc" id="L151" title="1 of 2 branches missed.">        if (remove) {</span>
+<span class="fc" id="L152">            orderedKeys.remove(key);</span>
+        }
+<span class="fc" id="L154">        return remove;</span>
+    }
+
+    @Override
+    public synchronized String toString() {
+        // Must override for Java 17 to maintain order since the implementation is based on a map
+<span class="fc" id="L160">        final int max = size() - 1;</span>
+<span class="pc bpc" id="L161" title="1 of 2 branches missed.">        if (max == -1) {</span>
+<span class="nc" id="L162">            return &quot;{}&quot;;</span>
+        }
+<span class="fc" id="L164">        final StringBuilder sb = new StringBuilder();</span>
+<span class="fc" id="L165">        final Iterator&lt;Map.Entry&lt;Object, Object&gt;&gt; it = entrySet().iterator();</span>
+<span class="fc" id="L166">        sb.append('{');</span>
+<span class="fc" id="L167">        for (int i = 0;; i++) {</span>
+<span class="fc" id="L168">            final Map.Entry&lt;Object, Object&gt; e = it.next();</span>
+<span class="fc" id="L169">            final Object key = e.getKey();</span>
+<span class="fc" id="L170">            final Object value = e.getValue();</span>
+<span class="pc bpc" id="L171" title="1 of 2 branches missed.">            sb.append(key == this ? &quot;(this Map)&quot; : key.toString());</span>
+<span class="fc" id="L172">            sb.append('=');</span>
+<span class="pc bpc" id="L173" title="1 of 2 branches missed.">            sb.append(value == this ? &quot;(this Map)&quot; : value.toString());</span>
+<span class="fc bfc" id="L174" title="All 2 branches covered.">            if (i == max) {</span>
+<span class="fc" id="L175">                return sb.append('}').toString();</span>
+            }
+<span class="fc" id="L177">            sb.append(&quot;, &quot;);</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

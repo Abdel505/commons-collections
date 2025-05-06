@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: org.apache.commons.collections4.bidimap.UnmodifiableSortedBidiMapTest
+-------------------------------------------------------------------------------
+Tests run: 89, Failures: 0, Errors: 0, Skipped: 4, Time elapsed: 0.051 s -- in org.apache.commons.collections4.bidimap.UnmodifiableSortedBidiMapTest
