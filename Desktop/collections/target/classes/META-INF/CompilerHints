@@ -1,0 +1,15 @@
+dontinline,*.*_all_jmhStub
+dontinline,*.*_avgt_jmhStub
+dontinline,*.*_sample_jmhStub
+dontinline,*.*_ss_jmhStub
+dontinline,*.*_thrpt_jmhStub
+inline,benchmarks/collections/BagBenchmark.setup
+inline,benchmarks/collections/BagBenchmark.testHashBagAdd
+inline,benchmarks/collections/BagBenchmark.testHashBagGetCount
+inline,benchmarks/collections/BagBenchmark.testHashBagRemove
+inline,benchmarks/collections/BagBenchmark.testSynchronizedBagAdd
+inline,benchmarks/collections/BagBenchmark.testSynchronizedBagGetCount
+inline,benchmarks/collections/BagBenchmark.testSynchronizedBagRemove
+inline,benchmarks/collections/BagBenchmark.testTreeBagAdd
+inline,benchmarks/collections/BagBenchmark.testTreeBagGetCount
+inline,benchmarks/collections/BagBenchmark.testTreeBagRemove

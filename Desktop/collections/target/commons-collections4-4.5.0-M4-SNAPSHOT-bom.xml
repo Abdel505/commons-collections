@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bom serialNumber="urn:uuid:f4375b14-6b52-3a5c-b167-3459e1482ab5" version="1" xmlns="http://cyclonedx.org/schema/bom/1.6">
+  <metadata>
+    <lifecycles>
+      <lifecycle>
+        <phase>build</phase>
+      </lifecycle>
+    </lifecycles>
+    <tools>
+      <components>
+        <component type="library">
+          <author>OWASP Foundation</author>
+          <group>org.cyclonedx</group>
+          <name>cyclonedx-maven-plugin</name>
+          <version>2.9.0</version>
+          <description>CycloneDX Maven plugin</description>
+          <hashes>
+            <hash alg="MD5">dfaeab7ec837ce07874e2ee66fdc57d3</hash>
+            <hash alg="SHA-1">8bab47bafc8183d0a5f37790ff55ed05ead1ae2d</hash>
+            <hash alg="SHA-256">67117e03eae4a03ca8bab3add044995f4899aa21798a2510b8265ef8101e90ac</hash>
+            <hash alg="SHA-512">ae6b706516bb76da806b7854aef9e348fa593f5159ae9d693ad38942165c0ebc0846d977a477f6029612d43468fd2cd73a5aa253c228a94fb8d184e0acefc3d2</hash>
+            <hash alg="SHA-384">ee872354d8b0dcd6f9835a913b3aaba70d9365a46043be78020183282a1e9fca812e969246cbe31d642541591b46648b</hash>
+            <hash alg="SHA3-384">e5167f9e7ceba3b7b4d1900c404543907868745334bedc69cdf79c271727148413033a3b1426b733b7549e612e44adee</hash>
+            <hash alg="SHA3-256">41fc0bc2275f354e2c7da01041ce73ce677364799cba53920a180aa5d4571c63</hash>
+            <hash alg="SHA3-512">ed7f97900b09b818dbc0b8a23c00a2843e1bc34e2e8eb5b6df52533af0a15b721de6f7d5c2fd9352b8d4fde768e080053b40a16f0f9f04c336fe9b44abe83fc0</hash>
+          </hashes>
+        </component>
+      </components>
+    </tools>
+    <component type="library" bom-ref="pkg:maven/org.apache.commons/commons-collections4@4.5.0-M4-SNAPSHOT?type=jar">
+      <publisher>The Apache Software Foundation</publisher>
+      <group>org.apache.commons</group>
+      <name>commons-collections4</name>
+      <version>4.5.0-M4-SNAPSHOT</version>
+      <description>The Apache Commons Collections package contains types that extend and augment the Java Collections Framework.</description>
+      <licenses>
+        <license>
+          <id>Apache-2.0</id>
+          <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+      </licenses>
+      <purl>pkg:maven/org.apache.commons/commons-collections4@4.5.0-M4-SNAPSHOT?type=jar</purl>
+      <externalReferences>
+        <reference type="website">
+          <url>https://commons.apache.org/proper/commons-collections/</url>
+        </reference>
+        <reference type="build-system">
+          <url>https://github.com/apache/commons-parent/actions</url>
+        </reference>
+        <reference type="distribution-intake">
+          <url>https://repository.apache.org/service/local/staging/deploy/maven2</url>
+        </reference>
+        <reference type="issue-tracker">
+          <url>https://issues.apache.org/jira/browse/COLLECTIONS</url>
+        </reference>
+        <reference type="mailing-list">
+          <url>https://mail-archives.apache.org/mod_mbox/commons-user/</url>
+        </reference>
+        <reference type="vcs">
+          <url>https://gitbox.apache.org/repos/asf?p=commons-collections.git</url>
+        </reference>
+      </externalReferences>
+    </component>
+    <properties>
+      <property name="maven.goal">makeAggregateBom</property>
+      <property name="maven.scopes">compile,provided,runtime,system</property>
+      <property name="cdx:reproducible">enabled</property>
+    </properties>
+  </metadata>
+  <components>
+    <component type="library" bom-ref="pkg:maven/org.junit.platform/junit-platform-engine@1.11.2?type=jar">
+      <group>org.junit.platform</group>
+      <name>junit-platform-engine</name>
+      <version>1.11.2</version>
+      <description>Module "junit-platform-engine" of JUnit 5.</description>
+      <scope>required</scope>
+      <hashes>
+        <hash alg="MD5">4844fc7b206eb259866c870bfdf7c475</hash>
+        <hash alg="SHA-1">846aa12289332e3bc7bc2d3d32a931d17c0086c4</hash>
+        <hash alg="SHA-256">4e625500397631304726da32f7ae599ce3bfc71d4ea11947de69dbbdf0fc4409</hash>
+        <hash alg="SHA-512">d3d31ab6ec660e40d26919f20a28a5d1aefb6bc1773b37c1a3a7560304cce0e1d6c91458afc74bb5dca3d9712db1b19dc1d6a0a3b29bf50503713e0b2e611538</hash>
+        <hash alg="SHA-384">5c3af7b3be66d4790fe08b9559c1d6e54dbff3efc361fb72d412c0f95f7d1a664b2bb83b270808e6aba933fa91d180f4</hash>
+        <hash alg="SHA3-384">e2b5a87a58fd83be3a14151e19be215e21ac6fa2d9a991ef1a83c86f3ad2c53e2be2339d626b418c65eadffacaf14705</hash>
+        <hash alg="SHA3-256">cd3963f08dc053d293f26c58bb29ed7524c4bf3617d8d83fcc6dbd19c04b76a3</hash>
+        <hash alg="SHA3-512">1500ce460424278cfb744e0b8f91b08847b37f3d63a64621f6cc22a7f1e9da4ba60432a06a5ad3084c33f08dedb1c8cad03de8ea261a86b63fb04feea2f0d3e3</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>EPL-2.0</id>
+        </license>
+      </licenses>
+      <purl>pkg:maven/org.junit.platform/junit-platform-engine@1.11.2?type=jar</purl>
+      <externalReferences>
+        <reference type="website">
+          <url>https://junit.org/junit5/</url>
+        </reference>
+        <reference type="vcs">
+          <url>https://github.com/junit-team/junit5</url>
+        </reference>
+      </externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/org.opentest4j/opentest4j@1.3.0?type=jar">
+      <group>org.opentest4j</group>
+      <name>opentest4j</name>
+      <version>1.3.0</version>
+      <description>Open Test Alliance for the JVM</description>
+      <scope>required</scope>
+      <hashes>
+        <hash alg="MD5">03c404f727531f3fd3b4c73997899327</hash>
+        <hash alg="SHA-1">152ea56b3a72f655d4fd677fc0ef2596c3dd5e6e</hash>
+        <hash alg="SHA-256">48e2df636cab6563ced64dcdff8abb2355627cb236ef0bf37598682ddf742f1b</hash>
+        <hash alg="SHA-512">78fc698a7871bb50305e3657893c10500595f043348d875f57bc39ca4a6a51eda3967b7c8c8a7ec3e8f85f2171bca4aa98823e912e416e87e81c6ba5b70a37c3</hash>
+        <hash alg="SHA-384">10398b6998c9202a0731e2e19ae1c3f9d8a83582c2663fe7bdda15794ee6fa816727dbd8f7c7164bd5395ee1cfe7c97e</hash>
+        <hash alg="SHA3-384">3abe706fd78509c25a402c7bbf6f9ddf71ffb5b35054864ba0fdf7902207115f888a0ba728fd71d2e87a9360d2498121</hash>
+        <hash alg="SHA3-256">d961907a1bfa1dcda329dca494ffbc251b31fabcaca5ab7095661a8ce3c1d654</hash>
+        <hash alg="SHA3-512">0ad661617bcac51bcd26f7ad4611c69b1fd9811b50dbf734e041a3243ab1f845e7796620e8a7c40c4a2df3946864598b1251396c7d9bd813203d82710788cce0</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>Apache-2.0</id>
+        </license>
+      </licenses>
+      <purl>pkg:maven/org.opentest4j/opentest4j@1.3.0?type=jar</purl>
+      <externalReferences>
+        <reference type="website">
+          <url>https://github.com/ota4j-team/opentest4j</url>
+        </reference>
+        <reference type="vcs">
+          <url>https://github.com/ota4j-team/opentest4j</url>
+        </reference>
+      </externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/org.junit.platform/junit-platform-commons@1.11.2?type=jar">
+      <group>org.junit.platform</group>
+      <name>junit-platform-commons</name>
+      <version>1.11.2</version>
+      <description>Module "junit-platform-commons" of JUnit 5.</description>
+      <scope>required</scope>
+      <hashes>
+        <hash alg="MD5">6fda65f077f400e4b8f658a3f212648a</hash>
+        <hash alg="SHA-1">5ebabe980aa4e445414a37ce728b99cba40ec0ff</hash>
+        <hash alg="SHA-256">03ce3c6054c011a26953a065da6a48489d1fbc1995e4ca3c6d700293e71b5800</hash>
+        <hash alg="SHA-512">012b3a30f8beb36925f4a4a332b08763e1937c01556cbd1a0b7cf00d920963ac074de83501872da38e1f52589bef04cf849fac0d2fe871a82bcb7bc8af7acdbf</hash>
+        <hash alg="SHA-384">6b0e35dc6a4c4e9b2ad655f04f3ebe66d3bfd7393ed051d75daa7058c151469ca95c491afb791d94573b8cf55c0c5b68</hash>
+        <hash alg="SHA3-384">0da3a84b0504bb200a69d5afa147e8d522586da3441fab256810be2814d991bffb69cb7fa58fbc37883a2de1f9b9cb9e</hash>
+        <hash alg="SHA3-256">765594a2fe82dfbe5364c48301f6c01003fd5b30d20a9fe1cfb6b6173198a7af</hash>
+        <hash alg="SHA3-512">ae2b46e4ac704e3862f36bf41cc84c04a2ae32899109036d00b4131a217acde17840ffa246e4dbf18d432dedbfae04e58dfc7c04d374878d766c4f7e908d4e99</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>EPL-2.0</id>
+        </license>
+      </licenses>
+      <purl>pkg:maven/org.junit.platform/junit-platform-commons@1.11.2?type=jar</purl>
+      <externalReferences>
+        <reference type="website">
+          <url>https://junit.org/junit5/</url>
+        </reference>
+        <reference type="vcs">
+          <url>https://github.com/junit-team/junit5</url>
+        </reference>
+      </externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/org.apiguardian/apiguardian-api@1.1.2?type=jar">
+      <group>org.apiguardian</group>
+      <name>apiguardian-api</name>
+      <version>1.1.2</version>
+      <description>@API Guardian</description>
+      <scope>required</scope>
+      <hashes>
+        <hash alg="MD5">8c7de3f82037fa4a2e8be2a2f13092af</hash>
+        <hash alg="SHA-1">a231e0d844d2721b0fa1b238006d15c6ded6842a</hash>
+        <hash alg="SHA-256">b509448ac506d607319f182537f0b35d71007582ec741832a1f111e5b5b70b38</hash>
+        <hash alg="SHA-512">d7ccd0e7019f1a997de39d66dc0ad4efe150428fdd7f4c743c93884f1602a3e90135ad34baea96d5b6d925ad6c0c8487c8e78304f0a089a12383d4a62e2c9a61</hash>
+        <hash alg="SHA-384">5ae11cfedcee7da43a506a67946ddc8a7a2622284a924ba78f74541e9a22db6868a15f5d84edb91a541e38afded734ea</hash>
+        <hash alg="SHA3-384">c146116b3dfd969200b2ce52d96b92dd02d6f5a45a86e7e85edf35600ddbc2f3c6e8a1ad7e2db4dcd2c398c09fad0927</hash>
+        <hash alg="SHA3-256">b4b436d7f615fc0b820204e69f83c517d1c1ccc5f6b99e459209ede4482268de</hash>
+        <hash alg="SHA3-512">7b95b7ac68a6891b8901b5507acd2c24a0c1e20effa63cd513764f513eab4eb55f8de5178edbe0a400c11f3a18d3f56243569d6d663100f06dd98288504c09c5</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>Apache-2.0</id>
+        </license>
+      </licenses>
+      <purl>pkg:maven/org.apiguardian/apiguardian-api@1.1.2?type=jar</purl>
+      <externalReferences>
+        <reference type="website">
+          <url>https://github.com/apiguardian-team/apiguardian</url>
+        </reference>
+        <reference type="vcs">
+          <url>https://github.com/apiguardian-team/apiguardian</url>
+        </reference>
+      </externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/org.pitest/pitest-junit5-plugin@1.2.0?type=jar">
+      <group>org.pitest</group>
+      <name>pitest-junit5-plugin</name>
+      <version>1.2.0</version>
+      <description>JUnit 5 plugin for pitest</description>
+      <scope>required</scope>
+      <hashes>
+        <hash alg="MD5">4fc7be19e8c36d06a4e465ad8f0d5096</hash>
+        <hash alg="SHA-1">0791a7bda11dc68761002ec8574d9132394f3292</hash>
+        <hash alg="SHA-256">b1d7cf091dfafa0479d0f751cda75922473a07afecbfc5fb901393169388d613</hash>
+        <hash alg="SHA-512">93a2a1d925af6b381cf202105fb347541e21c4f236b163abad51d3395db599e7b4952ef22f3fea2ec8bb7b1a63b286643e2ee949373567ec304d6a7baeea77c7</hash>
+        <hash alg="SHA-384">eb4bbf4a9c15099a8ae41af638d9ba959bc07886fbeb8bc7e20eeb1b80046b97cc076e68175a5da20bf8c51191863545</hash>
+        <hash alg="SHA3-384">7c219135e7a2ed07ee4bc44aa5e3c59e2dd2e472649a2d1839d50a4c1b6886ee11311f6c4548464bf44f7c0eb959c237</hash>
+        <hash alg="SHA3-256">5dd42abbf2d9ca66a7c5633b953d43272d9198e26ee75ba37cc87a3c6dc37fb2</hash>
+        <hash alg="SHA3-512">d711a808e8a0203fa106eb4e9addf51fbca0609574c35d473be300960e35c20a840e324d6a31c47bd92bde25234dd9e367f1eb1202c59910819b6bf2e7b164b4</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>Apache-2.0</id>
+        </license>
+      </licenses>
+      <purl>pkg:maven/org.pitest/pitest-junit5-plugin@1.2.0?type=jar</purl>
+      <externalReferences>
+        <reference type="website">
+          <url>http://pitest.org</url>
+        </reference>
+        <reference type="distribution-intake">
+          <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </reference>
+        <reference type="issue-tracker">
+          <url>https://github.com/hcoles/pitest/issues</url>
+        </reference>
+        <reference type="vcs">
+          <url>https://github.com/pitest/pitest-junit5-plugin</url>
+        </reference>
+      </externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/org.junit.platform/junit-platform-launcher@1.11.2?type=jar">
+      <group>org.junit.platform</group>
+      <name>junit-platform-launcher</name>
+      <version>1.11.2</version>
+      <description>Module "junit-platform-launcher" of JUnit 5.</description>
+      <scope>required</scope>
+      <hashes>
+        <hash alg="MD5">3b64ddce712d924726e2b281f510500b</hash>
+        <hash alg="SHA-1">992352e8d3efa6e18042a2cb1716447f7ac5ee35</hash>
+        <hash alg="SHA-256">fd933e1e2029bb6c749dd94f63830c0973c30b89ed71cfd5e7f4684368d2e629</hash>
+        <hash alg="SHA-512">b3a65b458435ac2f7a10a83cd45b741534a4ba71de3418018d5cbd166a4e8e19a5e462b1c3f4bcd97422403e15593530450e0f1dd0534e68e936a78a55e97e6f</hash>
+        <hash alg="SHA-384">6751e04d8e21965c6c0e58e99f23dfccff2f7a67440386114e61249b43dba48ea90468b8fd219b89c2c6ace621231835</hash>
+        <hash alg="SHA3-384">479bc88bd06016d3650570a0073cb1cd6d493614446eb9b5bfbae40962646dec721274e7a2311aee325970c575883ae7</hash>
+        <hash alg="SHA3-256">98e9e1a103060dd46007cd03cdf01c66741d82dfb77888f693a99b050e973098</hash>
+        <hash alg="SHA3-512">c71eaf1920b6ce62f0e500427bebc2b04f1373574f56a78cfa4374cc2951ab56abc4482226c29146e35b4de33e6e4d8a95760be5d1ac1556e6550e2b405d6114</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>EPL-2.0</id>
+        </license>
+      </licenses>
+      <purl>pkg:maven/org.junit.platform/junit-platform-launcher@1.11.2?type=jar</purl>
+      <externalReferences>
+        <reference type="website">
+          <url>https://junit.org/junit5/</url>
+        </reference>
+        <reference type="vcs">
+          <url>https://github.com/junit-team/junit5</url>
+        </reference>
+      </externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/org.openjdk.jmh/jmh-generator-annprocess@1.37?type=jar">
+      <group>org.openjdk.jmh</group>
+      <name>jmh-generator-annprocess</name>
+      <version>1.37</version>
+      <description>JMH benchmark generator, based on annotation processors.</description>
+      <scope>required</scope>
+      <hashes>
+        <hash alg="MD5">68593f57af0d1bb87d857904e3cfc4f5</hash>
+        <hash alg="SHA-1">da93888682df163144edf9b13d2b78e54166063a</hash>
+        <hash alg="SHA-256">6a5604b5b804e0daca1145df1077609321687734a8b49387e49f10557c186c77</hash>
+        <hash alg="SHA-512">0e828c394e02ea1c3472cb3b334f4e13f9e7c2e237dd2915d895b277afbd52573ffc824a3850b0808f190407c8644625ea7d06d77e567fd09607514b4d87f77a</hash>
+        <hash alg="SHA-384">7f8e96e9de30082a1583cd9694f5bffb7c4222884b07db7ea1d2db461ef503985ef7b8eb6b8b52704c59d6b28addc7b4</hash>
+        <hash alg="SHA3-384">3a0b77cda16bd979620e3f486d6752178d5163c88bc1b322a5968d40b7ee50a8516c409c9337f4817b3a73702fccb8f5</hash>
+        <hash alg="SHA3-256">e69559e94de873398363a408a7871d2c0c5f69e06727c2b468a9d92bb1ce60b2</hash>
+        <hash alg="SHA3-512">5f772be2e9300c7957227f8c4cb5816a7582afe5d2819a2952e5e8183c11cd4925347ff334a1db11bc3bd6151e84dbcd75e1e97b6ef432df5c64317e0c15d450</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <name>GNU General Public License (GPL), version 2, with the Classpath exception</name>
+          <url>http://openjdk.java.net/legal/gplv2+ce.html</url>
+        </license>
+      </licenses>
+      <purl>pkg:maven/org.openjdk.jmh/jmh-generator-annprocess@1.37?type=jar</purl>
+      <externalReferences>
+        <reference type="website">
+          <url>http://openjdk.java.net/projects/code-tools/jmh/jmh-generator-annprocess/</url>
+        </reference>
+        <reference type="vcs">
+          <url>https://github.com/openjdk/jmh/jmh-generator-annprocess</url>
+        </reference>
+      </externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/org.openjdk.jmh/jmh-core@1.37?type=jar">
+      <publisher>Oracle</publisher>
+      <group>org.openjdk.jmh</group>
+      <name>jmh-core</name>
+      <version>1.37</version>
+      <description>The jmh is a Java harness for building, running, and analysing
+        nano/micro/macro benchmarks written in Java and other languages
+        targeting the JVM.</description>
+      <scope>required</scope>
+      <hashes>
+        <hash alg="MD5">db951a09b14a411f1b642dc6ddc39125</hash>
+        <hash alg="SHA-1">896f27e49105b35ea1964319c83d12082e7a79ef</hash>
+        <hash alg="SHA-256">dc0eaf2bbf0036a70b60798c785d6e03a9daf06b68b8edb0f1ba9eb3421baeb3</hash>
+        <hash alg="SHA-512">8e434cc89f7c8a3035e172675d9f914415039ad8dc403a9f4a306efbe3249c20da0343aa51ebf9e3b9f8ba6746e8544ac561fbcd62f29dbb163b7f10c96c1f34</hash>
+        <hash alg="SHA-384">d90f632fccbe1511298a98bbf8757dc654fb4eb021acae9be1f8b679a20451c1e68a59e23f65b32a8f9499d0794a2fa4</hash>
+        <hash alg="SHA3-384">fd42b91747fb58c0addb3b511bede553d52377d0300a575edadc7cc7bd783b4800e48842e5feae02e0e35c57cefda167</hash>
+        <hash alg="SHA3-256">ed41476ee9c5de73354ed7218ed69272073805bc7281cbcdd309f43cb0e5bf0d</hash>
+        <hash alg="SHA3-512">a6aa50ca96076482ca59679527b626d6a87298eeb20ee9f3cddd397f3cac518cf114c9a9ddaad6dfe5c20d168a7f06d39f7a6655ab77b1de7cf8004294f758e3</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <name>GNU General Public License (GPL), version 2, with the Classpath exception</name>
+          <url>http://openjdk.java.net/legal/gplv2+ce.html</url>
+        </license>
+      </licenses>
+      <purl>pkg:maven/org.openjdk.jmh/jmh-core@1.37?type=jar</purl>
+      <externalReferences>
+        <reference type="website">
+          <url>http://openjdk.java.net/projects/code-tools/jmh/jmh-core/</url>
+        </reference>
+        <reference type="vcs">
+          <url>https://github.com/openjdk/jmh/jmh-core</url>
+        </reference>
+      </externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/net.sf.jopt-simple/jopt-simple@5.0.4?type=jar">
+      <group>net.sf.jopt-simple</group>
+      <name>jopt-simple</name>
+      <version>5.0.4</version>
+      <description>A Java library for parsing command line options</description>
+      <scope>required</scope>
+      <hashes>
+        <hash alg="MD5">eb0d9dffe9b0eddead68fe678be76c49</hash>
+        <hash alg="SHA-1">4fdac2fbe92dfad86aa6e9301736f6b4342a3f5c</hash>
+        <hash alg="SHA-256">df26cc58f235f477db07f753ba5a3ab243ebe5789d9f89ecf68dd62ea9a66c28</hash>
+        <hash alg="SHA-512">cbc27e0b6da6ae4b6245353d6626d2e3c171c3026a555fa21e8ef61b30714e286db85086d1a57c167016e8a7f07be2a243e34b3ab504b1877806f3bcec5df986</hash>
+        <hash alg="SHA-384">5911a03e11958951abf8450de13598f617471e53554ba79e203d6e7af1241022592cc97ad656650415d78c66d6882cfa</hash>
+        <hash alg="SHA3-384">a9233bbb74d1dcf613f5c55a3239a9c465bca6422c44d25eb77e08d12cdcbb60d98af78f28071b04f6a3963dcdc67bb3</hash>
+        <hash alg="SHA3-256">9fa8e57de87f425cab9e7e6dbf68c70268c9c3de29fa54b9f2be9e1b164ab368</hash>
+        <hash alg="SHA3-512">ea3d9c8469b3e3cbfd70616bde82c62685fd54b1970f324e44d58e48d8d60344abd59c06b1f43e8df1e8fc5bce6ff837eb034e2ba3dce499ffadf42ac4b406cc</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>MIT</id>
+        </license>
+      </licenses>
+      <purl>pkg:maven/net.sf.jopt-simple/jopt-simple@5.0.4?type=jar</purl>
+      <externalReferences>
+        <reference type="website">
+          <url>http://jopt-simple.github.io/jopt-simple</url>
+        </reference>
+        <reference type="distribution-intake">
+          <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </reference>
+        <reference type="issue-tracker">
+          <url>https://github.com/jopt-simple/jopt-simple/issues</url>
+        </reference>
+        <reference type="vcs">
+          <url>https://github.com/jopt-simple/jopt-simple</url>
+        </reference>
+      </externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/org.apache.commons/commons-math3@3.6.1?type=jar">
+      <publisher>The Apache Software Foundation</publisher>
+      <group>org.apache.commons</group>
+      <name>commons-math3</name>
+      <version>3.6.1</version>
+      <description>The Apache Commons Math project is a library of lightweight, self-contained mathematics and statistics components addressing the most common practical problems not immediately available in the Java programming language or commons-lang.</description>
+      <scope>required</scope>
+      <hashes>
+        <hash alg="MD5">5b730d97e4e6368069de1983937c508e</hash>
+        <hash alg="SHA-1">e4ba98f1d4b3c80ec46392f25e094a6a2e58fcbf</hash>
+        <hash alg="SHA-256">1e56d7b058d28b65abd256b8458e3885b674c1d588fa43cd7d1cbb9c7ef2b308</hash>
+        <hash alg="SHA-512">8bc2438b3b4d9a6be4a47a58410b2d4d0e56e05787ab24badab8cbc9075d61857e8d2f0bffedad33f18f8a356541d00f80a8597b5dedb995be8480d693d03226</hash>
+        <hash alg="SHA-384">95d1186d9ca06a3ea2e6437ddec3a55698e2493d3e72f6f554746b74fa929892bd71a2ab501a4e7b1ce56b7cd64e7ab4</hash>
+        <hash alg="SHA3-384">f85bb3e46a00fc4940a3be1331301302b0eb728e2d1fe2c1842d4761e5a0bc7a420c0c705ae60250ca1c7b03d3694b9e</hash>
+        <hash alg="SHA3-256">919c15ae4b1aef2a58aa6ea4b700bc5562e78dbc382f3393169425ca91ad368c</hash>
+        <hash alg="SHA3-512">dbe54d586c898cdbd7df6c31c131ca3525db17fcea5c7f5da8cbfe617e2afc667289290c76771ec5c9567a56fb2b177b0a31d67abcc656410c90287da4d88999</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>Apache-2.0</id>
+        </license>
+      </licenses>
+      <purl>pkg:maven/org.apache.commons/commons-math3@3.6.1?type=jar</purl>
+      <externalReferences>
+        <reference type="website">
+          <url>http://commons.apache.org/proper/commons-math/</url>
+        </reference>
+        <reference type="build-system">
+          <url>https://continuum-ci.apache.org/</url>
+        </reference>
+        <reference type="distribution-intake">
+          <url>https://repository.apache.org/service/local/staging/deploy/maven2</url>
+        </reference>
+        <reference type="issue-tracker">
+          <url>http://issues.apache.org/jira/browse/MATH</url>
+        </reference>
+        <reference type="mailing-list">
+          <url>http://mail-archives.apache.org/mod_mbox/commons-user/</url>
+        </reference>
+        <reference type="vcs">
+          <url>https://git-wip-us.apache.org/repos/asf?p=commons-math.git</url>
+        </reference>
+      </externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:maven/commons-codec/commons-codec@1.17.1?type=jar">
+      <publisher>The Apache Software Foundation</publisher>
+      <group>commons-codec</group>
+      <name>commons-codec</name>
+      <version>1.17.1</version>
+      <description>The Apache Commons Codec component contains encoders and decoders for
+     various formats such as Base16, Base32, Base64, digest, and Hexadecimal. In addition to these
+     widely used encoders and decoders, the codec package also maintains a
+     collection of phonetic encoding utilities.</description>
+      <scope>optional</scope>
+      <hashes>
+        <hash alg="MD5">7b3438ab4c6d91e0066d410947e43f3e</hash>
+        <hash alg="SHA-1">973638b7149d333563584137ebf13a691bb60579</hash>
+        <hash alg="SHA-256">f9f6cb103f2ddc3c99a9d80ada2ae7bf0685111fd6bffccb72033d1da4e6ff23</hash>
+        <hash alg="SHA-512">a7db98db470e6ad338266ff442fbdfbc277ba1d07a591336f7d15dc49fdac884da7dac04d806628b12437f993d8b5e6a4b800a66590ff11936dbf8bedcd8e860</hash>
+        <hash alg="SHA-384">ef0b8e0fbea5ee057b2c39114ff862a057d207d4dd6b4fd2f5ca96bfc039e76274f1dd02ddf985f1fa965736a522f5c5</hash>
+        <hash alg="SHA3-384">ac30c88a6c4bbdfa79cb697cd179627d2addae842e48e2ab167c4f9c5475d05ef4743f58fbed254dd7abc6f3877644fe</hash>
+        <hash alg="SHA3-256">f3fe1daf04e63f556d72f4f59f149327b65d899d6afe1de770b42faae2e323df</hash>
+        <hash alg="SHA3-512">29901c3e6394dd87f13a91b5432c678ac144cb6c86271b06c57c73c0480b23a4688d0266e2dd04abf5e1d148a2e80e1215dd87d2cb5ffbf2c023409f4f5f8f86</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>Apache-2.0</id>
+          <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+      </licenses>
+      <purl>pkg:maven/commons-codec/commons-codec@1.17.1?type=jar</purl>
+      <externalReferences>
+        <reference type="website">
+          <url>https://commons.apache.org/proper/commons-codec/</url>
+        </reference>
+        <reference type="build-system">
+          <url>https://github.com/apache/commons-parent/actions</url>
+        </reference>
+        <reference type="distribution-intake">
+          <url>https://repository.apache.org/service/local/staging/deploy/maven2</url>
+        </reference>
+        <reference type="issue-tracker">
+          <url>https://issues.apache.org/jira/browse/CODEC</url>
+        </reference>
+        <reference type="mailing-list">
+          <url>https://mail-archives.apache.org/mod_mbox/commons-user/</url>
+        </reference>
+        <reference type="vcs">
+          <url>https://github.com/apache/commons-codec</url>
+        </reference>
+      </externalReferences>
+    </component>
+  </components>
+  <dependencies>
+    <dependency ref="pkg:maven/org.apache.commons/commons-collections4@4.5.0-M4-SNAPSHOT?type=jar">
+      <dependency ref="pkg:maven/org.pitest/pitest-junit5-plugin@1.2.0?type=jar"/>
+      <dependency ref="pkg:maven/org.openjdk.jmh/jmh-generator-annprocess@1.37?type=jar"/>
+      <dependency ref="pkg:maven/org.openjdk.jmh/jmh-core@1.37?type=jar"/>
+      <dependency ref="pkg:maven/commons-codec/commons-codec@1.17.1?type=jar"/>
+    </dependency>
+    <dependency ref="pkg:maven/org.pitest/pitest-junit5-plugin@1.2.0?type=jar">
+      <dependency ref="pkg:maven/org.junit.platform/junit-platform-launcher@1.11.2?type=jar"/>
+    </dependency>
+    <dependency ref="pkg:maven/org.junit.platform/junit-platform-launcher@1.11.2?type=jar">
+      <dependency ref="pkg:maven/org.junit.platform/junit-platform-engine@1.11.2?type=jar"/>
+      <dependency ref="pkg:maven/org.apiguardian/apiguardian-api@1.1.2?type=jar"/>
+    </dependency>
+    <dependency ref="pkg:maven/org.junit.platform/junit-platform-engine@1.11.2?type=jar">
+      <dependency ref="pkg:maven/org.opentest4j/opentest4j@1.3.0?type=jar"/>
+      <dependency ref="pkg:maven/org.junit.platform/junit-platform-commons@1.11.2?type=jar"/>
+      <dependency ref="pkg:maven/org.apiguardian/apiguardian-api@1.1.2?type=jar"/>
+    </dependency>
+    <dependency ref="pkg:maven/org.opentest4j/opentest4j@1.3.0?type=jar"/>
+    <dependency ref="pkg:maven/org.junit.platform/junit-platform-commons@1.11.2?type=jar">
+      <dependency ref="pkg:maven/org.apiguardian/apiguardian-api@1.1.2?type=jar"/>
+    </dependency>
+    <dependency ref="pkg:maven/org.apiguardian/apiguardian-api@1.1.2?type=jar"/>
+    <dependency ref="pkg:maven/org.openjdk.jmh/jmh-generator-annprocess@1.37?type=jar">
+      <dependency ref="pkg:maven/org.openjdk.jmh/jmh-core@1.37?type=jar"/>
+    </dependency>
+    <dependency ref="pkg:maven/org.openjdk.jmh/jmh-core@1.37?type=jar">
+      <dependency ref="pkg:maven/net.sf.jopt-simple/jopt-simple@5.0.4?type=jar"/>
+      <dependency ref="pkg:maven/org.apache.commons/commons-math3@3.6.1?type=jar"/>
+    </dependency>
+    <dependency ref="pkg:maven/net.sf.jopt-simple/jopt-simple@5.0.4?type=jar"/>
+    <dependency ref="pkg:maven/org.apache.commons/commons-math3@3.6.1?type=jar"/>
+    <dependency ref="pkg:maven/commons-codec/commons-codec@1.17.1?type=jar"/>
+  </dependencies>
+</bom>
