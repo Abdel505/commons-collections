@@ -1,0 +1,41 @@
+Manifest-Version: 1.0
+Build-Jdk-Spec: 21
+Bundle-Description: The Apache Commons Collections package contains type
+ s that extend and augment the Java Collections Framework.
+Bundle-DocURL: https://commons.apache.org/proper/commons-collections/
+Bundle-License: https://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-ManifestVersion: 2
+Bundle-Name: Apache Commons Collections
+Bundle-SymbolicName: org.apache.commons.commons-collections4
+Bundle-Vendor: The Apache Software Foundation
+Bundle-Version: 4.5.0.M4-SNAPSHOT
+Created-By: Apache Maven Bundle Plugin 5.1.9
+Export-Package: org.apache.commons.collections4;version="4.5.0.M4-SNAPSH
+ OT",org.apache.commons.collections4.bag;version="4.5.0.M4-SNAPSHOT",org
+ .apache.commons.collections4.bidimap;version="4.5.0.M4-SNAPSHOT",org.ap
+ ache.commons.collections4.bloomfilter;version="4.5.0.M4-SNAPSHOT",org.a
+ pache.commons.collections4.collection;version="4.5.0.M4-SNAPSHOT",org.a
+ pache.commons.collections4.comparators;version="4.5.0.M4-SNAPSHOT",org.
+ apache.commons.collections4.functors;version="4.5.0.M4-SNAPSHOT",org.ap
+ ache.commons.collections4.iterators;version="4.5.0.M4-SNAPSHOT",org.apa
+ che.commons.collections4.keyvalue;version="4.5.0.M4-SNAPSHOT",org.apach
+ e.commons.collections4.list;version="4.5.0.M4-SNAPSHOT",org.apache.comm
+ ons.collections4.map;version="4.5.0.M4-SNAPSHOT",org.apache.commons.col
+ lections4.multimap;version="4.5.0.M4-SNAPSHOT",org.apache.commons.colle
+ ctions4.multiset;version="4.5.0.M4-SNAPSHOT",org.apache.commons.collect
+ ions4.properties;version="4.5.0.M4-SNAPSHOT",org.apache.commons.collect
+ ions4.queue;version="4.5.0.M4-SNAPSHOT",org.apache.commons.collections4
+ .sequence;version="4.5.0.M4-SNAPSHOT",org.apache.commons.collections4.s
+ et;version="4.5.0.M4-SNAPSHOT",org.apache.commons.collections4.splitmap
+ ;version="4.5.0.M4-SNAPSHOT",org.apache.commons.collections4.trie;versi
+ on="4.5.0.M4-SNAPSHOT",org.apache.commons.collections4.trie.analyzer;ve
+ rsion="4.5.0.M4-SNAPSHOT"
+Import-Package: org.openjdk.jmh.annotations,org.openjdk.jmh.infra,org.op
+ enjdk.jmh.results,org.openjdk.jmh.runner,org.openjdk.jmh.runner.options
+ ,org.openjdk.jmh.util,org.w3c.dom
+Include-Resource: META-INF/LICENSE.txt=LICENSE.txt,META-INF/NOTICE.txt=N
+ OTICE.txt
+Private-Package: benchmarks,benchmarks.collections,benchmarks.collection
+ s.jmh_generated
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Tool: Bnd-6.4.1.202306080939
