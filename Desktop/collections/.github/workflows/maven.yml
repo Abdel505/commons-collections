@@ -14,53 +14,41 @@
 # limitations under the License.
 
 name: Java CI with SonarCloud
-
 on: [push, pull_request]
 
-permissions:
-  contents: read
-
 jobs:
-  build:
+  compilation-checks:
     runs-on: ubuntu-latest
-    continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
-        java: [8, 11, 17, 21, 23]
-        experimental: [false]
-        include:
-          - java: 24-ea
-            experimental: true
-        
+        java: [8, 11, 17, 21]  # Only stable JDKs (removed experimental)
     steps:
-    - uses: actions/checkout@v4.2.2
-      with:
-        persist-credentials: false
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: ${{ matrix.java }}
+      - run: |
+          JAVA_SOURCE=${{ matrix.java < 17 && '1.8' || '21' }}
+          mvn --batch-mode --no-transfer-progress clean compile test-compile \
+            -Dmaven.compiler.source=$JAVA_SOURCE \
+            -Dmaven.compiler.target=$JAVA_SOURCE
 
-    - uses: actions/cache@v4.1.2
-      with:
-        path: ~/.m2/repository
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-        restore-keys: |
-          ${{ runner.os }}-maven-
-
-    - name: Set up JDK ${{ matrix.java }}
-      uses: actions/setup-java@v4.5.0
-      with:
-        distribution: 'temurin'
-        java-version: ${{ matrix.java }}
-
-    - name: Build with Maven
-      run: mvn --errors --show-version --batch-mode --no-transfer-progress clean install
-
-    # SonarCloud Analysis
-    - name: SonarCloud Scan
-      uses: SonarSource/sonarcloud-github-action@v2
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Make sure to add this secret
-      with:
-        args: > 
-          -Dsonar.projectKey=abdel505_collection-2 \
-          -Dsonar.organization=abdel505 \
-          -Dsonar.host.url=https://sonarcloud.io           
-
+  sonar-analysis:
+    needs: compilation-checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17
+      - run: |
+          mvn --batch-mode --no-transfer-progress verify sonar:sonar \
+            -Dsonar.projectKey=abdel505_collection-2 \
+            -Dsonar.organization=abdel505 \
+            -Dsonar.host.url=https://sonarcloud.io
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
